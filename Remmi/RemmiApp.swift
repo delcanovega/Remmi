@@ -5,6 +5,7 @@
 //  Created by Juan Ramón del Caño Vega on 22/5/24.
 //
 
+import SwiftData
 import SwiftUI
 
 @main
@@ -16,5 +17,6 @@ struct RemmiApp: App {
         WindowGroup {
             ContentView()
         }
+        .modelContainer(for: Item.self)
     }
 }

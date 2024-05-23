@@ -5,22 +5,52 @@
 //  Created by Juan Ramón del Caño Vega on 22/5/24.
 //
 
+import SwiftData
 import SwiftUI
 
 struct ContentView: View {
     
+    @Environment(\.modelContext) var modelContext
+
+    @Query var items: [Item]
+    
     @State private var filterText = ""
+    var filteredItems: [Item] {
+        items.filter { filterText.isEmpty || $0.name.lowercased().contains(filterText.lowercased()) }
+    }
 
     @State private var showingAddItem = false
+    @State private var showingSettings = false
 
-    let stuff = ["One", "Two", "Three", "Four"]
-    
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
-                List(stuff, id: \.self) { foo in
-                    NavigationLink(destination: DumbView()) {
-                        Text(foo)
+                if filteredItems.isEmpty {
+                    List {
+                        Button {
+                            showingAddItem = true
+                        } label: {
+                            VStack {
+                                Image("planet")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 100)
+                                Text(filterText.isEmpty ? "NO TRACKED ITEMS" : "NO MATCHING RESULT")
+                                    .font(.caption)
+                                    .foregroundStyle(.black)
+                                Text("CLICK HERE TO ADD ONE")
+                                    .font(.caption)
+                                    .foregroundStyle(.black)
+                            }
+                            .padding(.vertical)
+                            .frame(maxWidth: .infinity)
+                        }
+                    }
+                } else {
+                    List(filteredItems, id: \.self) { item in
+                        NavigationLink(destination: ItemView(item: item)) {
+                            Text(item.name)
+                        }
                     }
                 }
                 
@@ -47,7 +77,7 @@ struct ContentView: View {
                 }
                 ToolbarItem(id: "settings", placement: .primaryAction) {
                     Button {
-                        // TODO: Settings
+                        showingSettings = true
                     } label: {
                         Image(systemName: "gearshape")
                             .font(.title3)
@@ -56,9 +86,12 @@ struct ContentView: View {
                 }
             }
             .sheet(isPresented: $showingAddItem) {
-                //AddItemView()
-                Text("Add item")
-                    .presentationDetents([.medium])
+                AddItemView()
+                    .presentationDetents([.fraction(0.15)])
+                    .presentationCornerRadius(25)
+            }
+            .sheet(isPresented: $showingSettings) {
+                SettingsView()
                     .presentationCornerRadius(25)
             }
             .preferredColorScheme(.light)

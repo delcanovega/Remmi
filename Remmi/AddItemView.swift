@@ -9,35 +9,61 @@ import SwiftUI
 
 struct AddItemView: View {
     
+    @Environment(\.modelContext) var modelContext
     @Environment(\.dismiss) var dismiss
         
     @State private var name = ""
-    @State private var groupName = ""
+    
+    @FocusState private var isFocused: Bool
 
     var body: some View {
-        VStack {
-            TextField("Name", text: $name)
-                .font(.system(.headline, design: .rounded))
-                .padding()
-                .background(Color(UIColor.systemGray5))
-                .cornerRadius(12)
-            
-            TextField("Group", text: $groupName)
-                .font(.system(.headline, design: .rounded))
-                .padding()
-                .background(Color(UIColor.systemGray5))
-                .cornerRadius(12)
-            // TODO: show matching suggestions
-            
-            Section {
-                Button("Save") {
-                    dismiss()
+        NavigationStack {
+            VStack {
+                ZStack(alignment: .trailing) {
+                    TextField("Name", text: $name)
+                        .font(.system(.body, design: .rounded))
+                        .padding()
+                        .background(Color(UIColor.systemGray5))
+                        .cornerRadius(12)
+                        .focused($isFocused)
+                        .onAppear {
+                            isFocused = true
+                        }
+                    
+                    if !name.isEmpty {
+                        Image(systemName: "xmark.circle.fill")
+                            .font(.title3)
+                            .padding(.trailing)
+                            .foregroundColor(.secondary)
+                            .onTapGesture {
+                                name = ""
+                            }
+                    }
                 }
-                .disabled(name == "" || groupName == "")
-                
             }
+            .padding(.horizontal)
+            .toolbar(id: "addItem") {
+                ToolbarItem(id: "Cancel", placement: .cancellationAction) {
+                    Button {
+                        dismiss()
+                    } label: {
+                        Text("Cancel").font(.system(.body, design: .rounded))
+                    }
+                }
+                ToolbarItem(id: "save", placement: .confirmationAction) {
+                    Button {
+                        let item = Item(name: name, checkedAt: [])
+                        modelContext.insert(item)
+                        dismiss()
+                    } label: {
+                        Text("Save").font(.system(.body, design: .rounded))
+                    }
+                    .disabled(name == "")
+                }
+            }
+            .navigationTitle("Add Item")
+            .navigationBarTitleDisplayMode(.inline)
         }
-        .padding()
     }
     
 }

@@ -35,7 +35,6 @@ struct SearchView: View {
             }
             .padding()
                 
-            
             if !filterText.isEmpty {
                 Image(systemName: "xmark.circle.fill")
                     .font(.title3)
