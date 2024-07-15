@@ -9,7 +9,8 @@ import Foundation
 import SwiftData
 
 @Model
-class Category {
+class Category: Identifiable {
+    let id = UUID()
     var name: String
     var items = [Item]()
     

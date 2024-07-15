@@ -23,6 +23,9 @@ struct CategoriesView: View {
     }
     
     @FocusState private var isFocused: Bool
+    
+    @State private var editedName = ""
+    @State private var showingEdit = false
 
     var body: some View {
         VStack {
@@ -73,12 +76,55 @@ struct CategoriesView: View {
                 }
                 .scrollDisabled(true)
             } else {
-                List(categories, id: \.self) { category in
-                    Text(category.name)
+                List {
+                    ForEach(categories) { category in
+                        HStack {
+                            Text(category.name)
+                            Text("- \(category.items.count) items")
+                                .foregroundStyle(.gray)
+                        }
+                        .swipeActions {
+                            Button {
+                                showingEdit = true
+                            } label: {
+                                Label("Edit", systemImage: "pencil")
+                            }
+                            .tint(.blue)
+                            
+                            Button(role: .destructive) {
+                                modelContext.delete(category)
+                            } label: {
+                                Label("Delete", systemImage: "trash.fill")
+                            }
+                        }
+                        .alert("Change category name", isPresented: $showingEdit) {
+                            TextField("Name", text: $editedName)
+                            Button("Cancel") {
+                            }
+                            Button("Confirm") {
+                                category.name = editedName
+                                editedName = ""
+                            }
+                        }
+                    }
+                    .onDelete(perform: deleteCategories)
+                }
+                .toolbar {
+                    EditButton()
                 }
             }
         }
         .navigationTitle("Categories")
+    }
+    
+    func deleteCategories(at offsets: IndexSet) {
+        for offset in offsets {
+            let category = categories[offset]
+            for item in category.items {
+                item.category = nil
+            }
+            modelContext.delete(category)
+        }
     }
 }
 
@@ -86,6 +132,8 @@ struct CategoriesView: View {
     do {
         let config = ModelConfiguration(isStoredInMemoryOnly: true)
         let container = try ModelContainer(for: Category.self, configurations: config)
+        let sample = Category(name: "Plants")
+        container.mainContext.insert(sample)
         return CategoriesView()
             .modelContainer(container)
     } catch {
