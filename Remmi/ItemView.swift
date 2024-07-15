@@ -50,7 +50,7 @@ struct ItemView: View {
             
             HStack {
                 Spacer()
-                Image("space")
+                Image("details")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 240)

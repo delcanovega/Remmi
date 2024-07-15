@@ -17,6 +17,8 @@
 		EF2E22922BFE877F00A27FE9 /* AddItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2E22912BFE877F00A27FE9 /* AddItemView.swift */; };
 		EF2E22942BFFB5E200A27FE9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2E22932BFFB5E200A27FE9 /* AppDelegate.swift */; };
 		EFA25BD72C41C26E00B95CDB /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA25BD62C41C26E00B95CDB /* SettingsView.swift */; };
+		EFA25BDC2C42C7FB00B95CDB /* CategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA25BDB2C42C7FB00B95CDB /* CategoriesView.swift */; };
+		EFDB48AF2C42CAFE002C5DA3 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFDB48AE2C42CAFE002C5DA3 /* Category.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +33,8 @@
 		EF2E22912BFE877F00A27FE9 /* AddItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemView.swift; sourceTree = "<group>"; };
 		EF2E22932BFFB5E200A27FE9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EFA25BD62C41C26E00B95CDB /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		EFA25BDB2C42C7FB00B95CDB /* CategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesView.swift; sourceTree = "<group>"; };
+		EFDB48AE2C42CAFE002C5DA3 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +67,8 @@
 		EF2E227E2BFE3E8300A27FE9 /* Remmi */ = {
 			isa = PBXGroup;
 			children = (
+				EFDB48AD2C42CAF0002C5DA3 /* Model */,
+				EFA25BDA2C42C7D400B95CDB /* Settings */,
 				EF2E227F2BFE3E8300A27FE9 /* RemmiApp.swift */,
 				EF2E22812BFE3E8300A27FE9 /* ContentView.swift */,
 				EF2E22932BFFB5E200A27FE9 /* AppDelegate.swift */,
@@ -72,7 +78,6 @@
 				EF2E22832BFE3E8500A27FE9 /* Assets.xcassets */,
 				EF2E22852BFE3E8500A27FE9 /* Preview Content */,
 				EF2A529B2C260316002D1879 /* Item.swift */,
-				EFA25BD62C41C26E00B95CDB /* SettingsView.swift */,
 			);
 			path = Remmi;
 			sourceTree = "<group>";
@@ -83,6 +88,23 @@
 				EF2E22862BFE3E8500A27FE9 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		EFA25BDA2C42C7D400B95CDB /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				EFA25BD62C41C26E00B95CDB /* SettingsView.swift */,
+				EFA25BDB2C42C7FB00B95CDB /* CategoriesView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		EFDB48AD2C42CAF0002C5DA3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				EFDB48AE2C42CAFE002C5DA3 /* Category.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -156,10 +178,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				EF2E22942BFFB5E200A27FE9 /* AppDelegate.swift in Sources */,
+				EFDB48AF2C42CAFE002C5DA3 /* Category.swift in Sources */,
 				EFA25BD72C41C26E00B95CDB /* SettingsView.swift in Sources */,
 				EF2E22902BFE7E2C00A27FE9 /* ItemView.swift in Sources */,
 				EF2E22822BFE3E8300A27FE9 /* ContentView.swift in Sources */,
 				EF2E228E2BFE437E00A27FE9 /* SearchView.swift in Sources */,
+				EFA25BDC2C42C7FB00B95CDB /* CategoriesView.swift in Sources */,
 				EF2A529C2C260316002D1879 /* Item.swift in Sources */,
 				EF2E22802BFE3E8300A27FE9 /* RemmiApp.swift in Sources */,
 				EF2E22922BFE877F00A27FE9 /* AddItemView.swift in Sources */,

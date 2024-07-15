@@ -17,6 +17,6 @@ struct RemmiApp: App {
         WindowGroup {
             ContentView()
         }
-        .modelContainer(for: Item.self)
+        .modelContainer(for: Category.self)
     }
 }

@@ -11,6 +11,7 @@ import SwiftData
 @Model
 class Item {
     var name: String
+    var category: Category?
     private var _checkedAt: [Date]
     
     var checkedAt: [Date] {
