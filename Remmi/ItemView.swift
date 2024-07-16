@@ -18,6 +18,11 @@ struct ItemView: View {
 
     var item: Item
     
+    @Query var categories: [Category]
+    
+    @State private var showingAddCategory = false
+    @State private var categoryName = ""
+    
     var body: some View {
         VStack {
             HStack {
@@ -30,15 +35,33 @@ struct ItemView: View {
                 .background(.thickMaterial)
                 .cornerRadius(12)
                 
-                VStack {
-                    Text("Category")
-                    Text("ToDo")
+                Menu {
+                    Button("No Category", action: { item.category = nil })
+                    ForEach(categories) { category in
+                        Button(category.name, action: { item.category = category } )
+                    }
+                    Button { 
+                        showingAddCategory = true
+                    } label: {
+                        Label("Add New", systemImage: "plus")
+                    }
+                } label: {
+                    Label(item.category?.name ?? "No Category", systemImage: "chevron.up.chevron.down")
+                    .padding()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background(.thickMaterial)
+                    .cornerRadius(12)
                 }
-                .padding()
-                .frame(maxWidth: .infinity)
-                .background(.thickMaterial)
-                .cornerRadius(12)
+                .alert("Add new category", isPresented: $showingAddCategory) {
+                    TextField("Name", text: $categoryName)
+                    Button("Cancel") { }
+                    Button("Confirm") {
+                        item.category = Category(name: categoryName)
+                        categoryName = ""
+                    }
+                }
             }
+            .frame(height: 75)
             
             MultiDatePicker("Checked at", selection: Binding(
                 get: { Set(item.checkedAt.map { calendar.dateComponents([.calendar, .era, .year, .month, .day], from: $0) }) },
