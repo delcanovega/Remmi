@@ -16,12 +16,7 @@ struct ItemView: View {
     
     @State private var showingDeleteAlert = false
 
-    var item: Item
-    
-    @Query var categories: [Category]
-    
-    @State private var showingAddCategory = false
-    @State private var categoryName = ""
+    @ObservedObject var item: Item
     
     var body: some View {
         VStack {
@@ -35,31 +30,11 @@ struct ItemView: View {
                 .background(.thickMaterial)
                 .cornerRadius(12)
                 
-                Menu {
-                    Button("No Category", action: { item.category = nil })
-                    ForEach(categories) { category in
-                        Button(category.name, action: { item.category = category } )
-                    }
-                    Button { 
-                        showingAddCategory = true
-                    } label: {
-                        Label("Add New", systemImage: "plus")
-                    }
-                } label: {
-                    Label(item.category?.name ?? "No Category", systemImage: "chevron.up.chevron.down")
+                CategoryMenu(selectedCategory: $item.category)
                     .padding()
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .background(.thickMaterial)
                     .cornerRadius(12)
-                }
-                .alert("Add new category", isPresented: $showingAddCategory) {
-                    TextField("Name", text: $categoryName)
-                    Button("Cancel") { }
-                    Button("Confirm") {
-                        item.category = Category(name: categoryName)
-                        categoryName = ""
-                    }
-                }
             }
             .frame(height: 75)
             
@@ -105,7 +80,7 @@ struct ItemView: View {
     do {
         let config = ModelConfiguration(isStoredInMemoryOnly: true)
         let container = try ModelContainer(for: Item.self, configurations: config)
-        let item = Item(name: "Test item", checkedAt: [Date.now])
+        let item = Item(name: "Test item", category: nil)
         return ItemView(item: item)
             .modelContainer(container)
     } catch {

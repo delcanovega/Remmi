@@ -16,6 +16,7 @@
 		EF2E22902BFE7E2C00A27FE9 /* ItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2E228F2BFE7E2C00A27FE9 /* ItemView.swift */; };
 		EF2E22922BFE877F00A27FE9 /* AddItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2E22912BFE877F00A27FE9 /* AddItemView.swift */; };
 		EF2E22942BFFB5E200A27FE9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2E22932BFFB5E200A27FE9 /* AppDelegate.swift */; };
+		EF6536B12C46EA7100EA0CEC /* CategoryMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6536B02C46EA7100EA0CEC /* CategoryMenu.swift */; };
 		EFA25BD72C41C26E00B95CDB /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA25BD62C41C26E00B95CDB /* SettingsView.swift */; };
 		EFA25BDC2C42C7FB00B95CDB /* CategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA25BDB2C42C7FB00B95CDB /* CategoriesView.swift */; };
 		EFDB48AF2C42CAFE002C5DA3 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFDB48AE2C42CAFE002C5DA3 /* Category.swift */; };
@@ -32,6 +33,7 @@
 		EF2E228F2BFE7E2C00A27FE9 /* ItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemView.swift; sourceTree = "<group>"; };
 		EF2E22912BFE877F00A27FE9 /* AddItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemView.swift; sourceTree = "<group>"; };
 		EF2E22932BFFB5E200A27FE9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		EF6536B02C46EA7100EA0CEC /* CategoryMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryMenu.swift; sourceTree = "<group>"; };
 		EFA25BD62C41C26E00B95CDB /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		EFA25BDB2C42C7FB00B95CDB /* CategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesView.swift; sourceTree = "<group>"; };
 		EFDB48AE2C42CAFE002C5DA3 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
@@ -67,6 +69,7 @@
 		EF2E227E2BFE3E8300A27FE9 /* Remmi */ = {
 			isa = PBXGroup;
 			children = (
+				EF6536AF2C46EA4700EA0CEC /* Common */,
 				EFDB48AD2C42CAF0002C5DA3 /* Model */,
 				EFA25BDA2C42C7D400B95CDB /* Settings */,
 				EF2E227F2BFE3E8300A27FE9 /* RemmiApp.swift */,
@@ -88,6 +91,14 @@
 				EF2E22862BFE3E8500A27FE9 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		EF6536AF2C46EA4700EA0CEC /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				EF6536B02C46EA7100EA0CEC /* CategoryMenu.swift */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 		EFA25BDA2C42C7D400B95CDB /* Settings */ = {
@@ -182,6 +193,7 @@
 				EFA25BD72C41C26E00B95CDB /* SettingsView.swift in Sources */,
 				EF2E22902BFE7E2C00A27FE9 /* ItemView.swift in Sources */,
 				EF2E22822BFE3E8300A27FE9 /* ContentView.swift in Sources */,
+				EF6536B12C46EA7100EA0CEC /* CategoryMenu.swift in Sources */,
 				EF2E228E2BFE437E00A27FE9 /* SearchView.swift in Sources */,
 				EFA25BDC2C42C7FB00B95CDB /* CategoriesView.swift in Sources */,
 				EF2A529C2C260316002D1879 /* Item.swift in Sources */,

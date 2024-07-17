@@ -87,7 +87,7 @@ struct ContentView: View {
             }
             .sheet(isPresented: $showingAddItem) {
                 AddItemView()
-                    .presentationDetents([.fraction(0.15)])
+                    .presentationDetents([.fraction(0.22)])
                     .presentationCornerRadius(25)
             }
             .sheet(isPresented: $showingSettings) {
