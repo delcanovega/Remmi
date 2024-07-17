@@ -15,10 +15,17 @@ struct SettingsView: View {
     var body: some View {
         NavigationStack {
             List {
+                Section(header: Text("CATEGORIES")) {
+                    NavigationLink(destination: CategoriesView()) {
+                        Text("Manage categories")
+                    }
+                }
+                
                 Section(header: Text("DEV")) {
                     Button("Delete tracked items") {
                         do {
                             try modelContext.delete(model: Item.self)
+                            try modelContext.delete(model: Category.self)
                             dismiss()
                         } catch {
                             print("Failed to clear Items")

@@ -11,12 +11,19 @@ import SwiftUI
 struct ContentView: View {
     
     @Environment(\.modelContext) var modelContext
-
-    @Query var items: [Item]
     
     @State private var filterText = ""
-    var filteredItems: [Item] {
-        items.filter { filterText.isEmpty || $0.name.lowercased().contains(filterText.lowercased()) }
+
+    @Query var items: [Item]
+    private var filteredItems: [Item] {
+        items.filter { item in
+            let matchesName = item.name.lowercased().contains(filterText.lowercased())
+            let matchesCategory = item.category?.name.lowercased().contains(filterText.lowercased()) ?? false
+            return filterText.isEmpty || matchesName || matchesCategory
+        }
+    }
+    private var itemsByCategory: [Category?: [Item]] {
+        Dictionary(grouping: filteredItems, by: { $0.category })
     }
 
     @State private var showingAddItem = false
@@ -31,7 +38,7 @@ struct ContentView: View {
                             showingAddItem = true
                         } label: {
                             VStack {
-                                Image("planet")
+                                Image("empty")
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
                                     .frame(width: 100)
@@ -46,10 +53,17 @@ struct ContentView: View {
                             .frame(maxWidth: .infinity)
                         }
                     }
+                    .scrollDisabled(true)
                 } else {
-                    List(filteredItems, id: \.self) { item in
-                        NavigationLink(destination: ItemView(item: item)) {
-                            Text(item.name)
+                    List {
+                        ForEach(Array(itemsByCategory.keys), id: \.self) { category in
+                            Section(header: Text(category?.name ?? "")) {
+                                ForEach(itemsByCategory[category] ?? []) { item in
+                                    NavigationLink(destination: ItemView(item: item)) {
+                                        Text(item.name)
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -87,7 +101,7 @@ struct ContentView: View {
             }
             .sheet(isPresented: $showingAddItem) {
                 AddItemView()
-                    .presentationDetents([.fraction(0.15)])
+                    .presentationDetents([.fraction(0.22)])
                     .presentationCornerRadius(25)
             }
             .sheet(isPresented: $showingSettings) {

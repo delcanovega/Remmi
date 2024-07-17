@@ -5,6 +5,7 @@
 //  Created by Juan Ramón del Caño Vega on 22/5/24.
 //
 
+import SwiftData
 import SwiftUI
 
 struct AddItemView: View {
@@ -12,7 +13,8 @@ struct AddItemView: View {
     @Environment(\.modelContext) var modelContext
     @Environment(\.dismiss) var dismiss
         
-    @State private var name = ""
+    @State private var name: String = ""
+    @State private var selectedCategory: Category? = nil
     
     @FocusState private var isFocused: Bool
 
@@ -23,7 +25,7 @@ struct AddItemView: View {
                     TextField("Name", text: $name)
                         .font(.system(.body, design: .rounded))
                         .padding()
-                        .background(Color(UIColor.systemGray5))
+                        .background(.thickMaterial)
                         .cornerRadius(12)
                         .focused($isFocused)
                         .onAppear {
@@ -31,15 +33,17 @@ struct AddItemView: View {
                         }
                     
                     if !name.isEmpty {
-                        Image(systemName: "xmark.circle.fill")
+                        Button("", systemImage: "xmark.circle.fill", action: { name = "" })
                             .font(.title3)
                             .padding(.trailing)
                             .foregroundColor(.secondary)
-                            .onTapGesture {
-                                name = ""
-                            }
                     }
                 }
+                CategoryMenu(selectedCategory: $selectedCategory)
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .background(.thickMaterial)
+                    .cornerRadius(12)
             }
             .padding(.horizontal)
             .toolbar(id: "addItem") {
@@ -52,7 +56,7 @@ struct AddItemView: View {
                 }
                 ToolbarItem(id: "save", placement: .confirmationAction) {
                     Button {
-                        let item = Item(name: name, checkedAt: [])
+                        let item = Item(name: name, category: selectedCategory)
                         modelContext.insert(item)
                         dismiss()
                     } label: {
@@ -69,5 +73,11 @@ struct AddItemView: View {
 }
 
 #Preview {
-    AddItemView()
+    do {
+        let config = ModelConfiguration(isStoredInMemoryOnly: true)
+        let container = try ModelContainer(for: Item.self, configurations: config)
+        return AddItemView().modelContainer(container)
+    } catch {
+        return Text("Failed to create preview: \(error.localizedDescription)")
+    }
 }

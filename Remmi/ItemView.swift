@@ -16,7 +16,7 @@ struct ItemView: View {
     
     @State private var showingDeleteAlert = false
 
-    var item: Item
+    @ObservedObject var item: Item
     
     var body: some View {
         VStack {
@@ -30,15 +30,13 @@ struct ItemView: View {
                 .background(.thickMaterial)
                 .cornerRadius(12)
                 
-                VStack {
-                    Text("Category")
-                    Text("ToDo")
-                }
-                .padding()
-                .frame(maxWidth: .infinity)
-                .background(.thickMaterial)
-                .cornerRadius(12)
+                CategoryMenu(selectedCategory: $item.category)
+                    .padding()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background(.thickMaterial)
+                    .cornerRadius(12)
             }
+            .frame(height: 75)
             
             MultiDatePicker("Checked at", selection: Binding(
                 get: { Set(item.checkedAt.map { calendar.dateComponents([.calendar, .era, .year, .month, .day], from: $0) }) },
@@ -50,7 +48,7 @@ struct ItemView: View {
             
             HStack {
                 Spacer()
-                Image("space")
+                Image("details")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 240)
@@ -82,7 +80,7 @@ struct ItemView: View {
     do {
         let config = ModelConfiguration(isStoredInMemoryOnly: true)
         let container = try ModelContainer(for: Item.self, configurations: config)
-        let item = Item(name: "Test item", checkedAt: [Date.now])
+        let item = Item(name: "Test item", category: nil)
         return ItemView(item: item)
             .modelContainer(container)
     } catch {
