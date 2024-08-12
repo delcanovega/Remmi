@@ -13,7 +13,6 @@ struct ContentView: View {
     @Environment(\.modelContext) var modelContext
     
     @State private var filterText = ""
-    
     @StateObject private var userPreferences = UserPreferences()
 
     @Query var items: [Item]
@@ -129,13 +128,9 @@ struct ContentView: View {
 
 #Preview {
     do {
-        let config = ModelConfiguration(isStoredInMemoryOnly: true)
-        let container = try ModelContainer(for: Category.self, configurations: config)
-        let plants = Category(name: "Plants")
-        let monstera = Item(name: "Monstera", category: plants)
-        monstera.checkedAt = [Date.now]
-        container.mainContext.insert(monstera)
-        return ContentView().modelContainer(container)
+        let previewer = try Previewer()
+        
+        return ContentView().modelContainer(previewer.container)
     } catch {
         return Text("Failed to create preview: \(error.localizedDescription)")
     }

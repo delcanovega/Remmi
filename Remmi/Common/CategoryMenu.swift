@@ -44,12 +44,10 @@ struct CategoryMenu: View {
 
 #Preview {
     do {
-        let config = ModelConfiguration(isStoredInMemoryOnly: true)
-        let container = try ModelContainer(for: Item.self, configurations: config)
-        let cat = Category(name: "Test")
-        container.mainContext.insert(cat)
-        return CategoryMenu(selectedCategory: .constant(cat))
-            .modelContainer(container)
+        let previewer = try Previewer()
+        
+        return CategoryMenu(selectedCategory: .constant(previewer.category))
+            .modelContainer(previewer.container)
     } catch {
         return Text("Failed to create preview: \(error.localizedDescription)")
     }

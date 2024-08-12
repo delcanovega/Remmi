@@ -30,11 +30,10 @@ struct ItemListView: View {
 
 #Preview {
     do {
-        let config = ModelConfiguration(isStoredInMemoryOnly: true)
-        let container = try ModelContainer(for: Item.self, configurations: config)
-        let item = Item(name: "Test item", category: nil)
-        return ItemListView(item: item)
-            .modelContainer(container)
+        let previewer = try Previewer()
+        
+        return ItemListView(item: previewer.item)
+            .modelContainer(previewer.container)
     } catch {
         return Text("Failed to create preview: \(error.localizedDescription)")
     }
