@@ -20,6 +20,10 @@ class Item: Identifiable, ObservableObject {
         set { _checkedAt = newValue }
     }
     
+    var lastCheckedAt: Date? {
+        checkedAt.last
+    }
+    
     init(name: String, category: Category?) {
         self.name = name
         self.category = category

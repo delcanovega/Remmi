@@ -36,10 +36,9 @@ struct ContentView: View {
                     return $0.name < $1.name
                     
                 case .lastChecked:
-                    // TODO JCA: verify sorting option and cleanup implementation
-                    let lastCheckedLeft = $0.items.compactMap { $0.checkedAt.last }.max() ?? Date.distantFuture
-                    let lastCheckedRight = $1.items.compactMap { $0.checkedAt.last }.max() ?? Date.distantFuture
-                    return lastCheckedLeft < lastCheckedRight
+                    let lastCheckedLeft = $0.items.compactMap { $0.lastCheckedAt }.max() ?? Date.distantPast
+                    let lastCheckedRight = $1.items.compactMap { $0.lastCheckedAt }.max() ?? Date.distantPast
+                    return lastCheckedLeft > lastCheckedRight
                 }
             }
     }
@@ -77,7 +76,7 @@ struct ContentView: View {
                         Section(header: Text("")) {
                             ForEach(itemsByCategory[nil] ?? []) { item in
                                 NavigationLink(destination: ItemView(item: item)) {
-                                    Text(item.name)
+                                    ItemListView(item: item)
                                 }
                             }
                         }
@@ -85,7 +84,7 @@ struct ContentView: View {
                             Section(header: Text(category.name)) {
                                 ForEach(itemsByCategory[category] ?? []) { item in
                                     NavigationLink(destination: ItemView(item: item)) {
-                                        Text(item.name)
+                                        ItemListView(item: item)
                                     }
                                 }
                             }
@@ -139,5 +138,15 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    do {
+        let config = ModelConfiguration(isStoredInMemoryOnly: true)
+        let container = try ModelContainer(for: Category.self, configurations: config)
+        let plants = Category(name: "Plants")
+        let monstera = Item(name: "Monstera", category: plants)
+        monstera.checkedAt = [Date.now]
+        container.mainContext.insert(monstera)
+        return ContentView().modelContainer(container)
+    } catch {
+        return Text("Failed to create preview: \(error.localizedDescription)")
+    }
 }
