@@ -32,6 +32,7 @@ struct SearchView: View {
                     .background(Color(UIColor.systemGray5))
                     .cornerRadius(12)
                     .focused($isFocused)
+                    .disableAutocorrection(true)
             }
             .padding()
                 
