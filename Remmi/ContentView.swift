@@ -13,6 +13,8 @@ struct ContentView: View {
     @Environment(\.modelContext) var modelContext
     
     @State private var filterText = ""
+    
+    @StateObject private var userPreferences = UserPreferences()
 
     @Query var items: [Item]
     private var filteredItems: [Item] {
@@ -24,6 +26,22 @@ struct ContentView: View {
     }
     private var itemsByCategory: [Category?: [Item]] {
         Dictionary(grouping: filteredItems, by: { $0.category })
+    }
+    private var sortedCategories: [Category] {
+        itemsByCategory.keys
+            .compactMap { $0 }
+            .sorted {
+                switch userPreferences.categorySorting {
+                case .name:
+                    return $0.name < $1.name
+                    
+                case .lastChecked:
+                    // TODO JCA: verify sorting option and cleanup implementation
+                    let lastCheckedLeft = $0.items.compactMap { $0.checkedAt.last }.max() ?? Date.distantFuture
+                    let lastCheckedRight = $1.items.compactMap { $0.checkedAt.last }.max() ?? Date.distantFuture
+                    return lastCheckedLeft < lastCheckedRight
+                }
+            }
     }
 
     @State private var showingAddItem = false
@@ -56,8 +74,15 @@ struct ContentView: View {
                     .scrollDisabled(true)
                 } else {
                     List {
-                        ForEach(Array(itemsByCategory.keys), id: \.self) { category in
-                            Section(header: Text(category?.name ?? "")) {
+                        Section(header: Text("")) {
+                            ForEach(itemsByCategory[nil] ?? []) { item in
+                                NavigationLink(destination: ItemView(item: item)) {
+                                    Text(item.name)
+                                }
+                            }
+                        }
+                        ForEach(sortedCategories, id: \.self) { category in
+                            Section(header: Text(category.name)) {
                                 ForEach(itemsByCategory[category] ?? []) { item in
                                     NavigationLink(destination: ItemView(item: item)) {
                                         Text(item.name)
@@ -105,7 +130,7 @@ struct ContentView: View {
                     .presentationCornerRadius(25)
             }
             .sheet(isPresented: $showingSettings) {
-                SettingsView()
+                SettingsView(userPreferences: userPreferences)
                     .presentationCornerRadius(25)
             }
             .preferredColorScheme(.light)

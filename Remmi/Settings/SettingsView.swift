@@ -11,11 +11,19 @@ struct SettingsView: View {
 
     @Environment(\.modelContext) var modelContext
     @Environment(\.dismiss) var dismiss
+    
+    @ObservedObject var userPreferences: UserPreferences
 
     var body: some View {
         NavigationStack {
-            List {
+            Form {
                 Section(header: Text("CATEGORIES")) {
+                    Picker("Sort by", selection: $userPreferences.categorySorting) {
+                        ForEach(SortOption.allCases, id: \.self) { option in
+                            Text(option.rawValue).tag(option)
+                        }
+                    }
+
                     NavigationLink(destination: CategoriesView()) {
                         Text("Manage categories")
                     }
@@ -49,5 +57,5 @@ struct SettingsView: View {
 }
 
 #Preview {
-    SettingsView()
+    SettingsView(userPreferences: UserPreferences())
 }
