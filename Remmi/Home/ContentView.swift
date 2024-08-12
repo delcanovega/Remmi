@@ -13,6 +13,7 @@ struct ContentView: View {
     @Environment(\.modelContext) var modelContext
     
     @State private var filterText = ""
+    @StateObject private var userPreferences = UserPreferences()
 
     @Query var items: [Item]
     private var filteredItems: [Item] {
@@ -24,6 +25,18 @@ struct ContentView: View {
     }
     private var itemsByCategory: [Category?: [Item]] {
         Dictionary(grouping: filteredItems, by: { $0.category })
+    }
+    private var sortedCategories: [Category?] {
+        itemsByCategory.keys
+            .sorted {
+                switch userPreferences.categorySorting {
+                case .name:
+                    return sortByName(left: $0, right: $1)
+                    
+                case .lastChecked:
+                    return sortByLastChecked(left: $0, right: $1)
+                }
+            }
     }
 
     @State private var showingAddItem = false
@@ -56,11 +69,11 @@ struct ContentView: View {
                     .scrollDisabled(true)
                 } else {
                     List {
-                        ForEach(Array(itemsByCategory.keys), id: \.self) { category in
+                        ForEach(sortedCategories, id: \.self) { category in
                             Section(header: Text(category?.name ?? "")) {
                                 ForEach(itemsByCategory[category] ?? []) { item in
                                     NavigationLink(destination: ItemView(item: item)) {
-                                        Text(item.name)
+                                        ItemListView(item: item)
                                     }
                                 }
                             }
@@ -105,7 +118,7 @@ struct ContentView: View {
                     .presentationCornerRadius(25)
             }
             .sheet(isPresented: $showingSettings) {
-                SettingsView()
+                SettingsView(userPreferences: userPreferences)
                     .presentationCornerRadius(25)
             }
             .preferredColorScheme(.light)
@@ -114,5 +127,11 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    do {
+        let previewer = try Previewer()
+        
+        return ContentView().modelContainer(previewer.container)
+    } catch {
+        return Text("Failed to create preview: \(error.localizedDescription)")
+    }
 }

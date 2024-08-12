@@ -130,12 +130,10 @@ struct CategoriesView: View {
 
 #Preview {
     do {
-        let config = ModelConfiguration(isStoredInMemoryOnly: true)
-        let container = try ModelContainer(for: Category.self, configurations: config)
-        let sample = Category(name: "Plants")
-        container.mainContext.insert(sample)
+        let previewer = try Previewer()
+        
         return CategoriesView()
-            .modelContainer(container)
+            .modelContainer(previewer.container)
     } catch {
         return Text("Failed to create preview: \(error.localizedDescription)")
     }
