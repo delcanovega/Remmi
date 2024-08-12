@@ -27,18 +27,15 @@ struct ContentView: View {
     private var itemsByCategory: [Category?: [Item]] {
         Dictionary(grouping: filteredItems, by: { $0.category })
     }
-    private var sortedCategories: [Category] {
+    private var sortedCategories: [Category?] {
         itemsByCategory.keys
-            .compactMap { $0 }
             .sorted {
                 switch userPreferences.categorySorting {
                 case .name:
-                    return $0.name < $1.name
+                    return sortByName(left: $0, right: $1)
                     
                 case .lastChecked:
-                    let lastCheckedLeft = $0.items.compactMap { $0.lastCheckedAt }.max() ?? Date.distantPast
-                    let lastCheckedRight = $1.items.compactMap { $0.lastCheckedAt }.max() ?? Date.distantPast
-                    return lastCheckedLeft > lastCheckedRight
+                    return sortByLastChecked(left: $0, right: $1)
                 }
             }
     }
@@ -73,15 +70,8 @@ struct ContentView: View {
                     .scrollDisabled(true)
                 } else {
                     List {
-                        Section(header: Text("")) {
-                            ForEach(itemsByCategory[nil] ?? []) { item in
-                                NavigationLink(destination: ItemView(item: item)) {
-                                    ItemListView(item: item)
-                                }
-                            }
-                        }
                         ForEach(sortedCategories, id: \.self) { category in
-                            Section(header: Text(category.name)) {
+                            Section(header: Text(category?.name ?? "")) {
                                 ForEach(itemsByCategory[category] ?? []) { item in
                                     NavigationLink(destination: ItemView(item: item)) {
                                         ItemListView(item: item)
