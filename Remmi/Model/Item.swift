@@ -13,15 +13,19 @@ class Item: Identifiable, ObservableObject {
     let id = UUID()
     var name: String
     var category: Category?
-    private var _checkedAt: [Date] = []
+    private var _checkedOn: [Date] = []
     
-    var checkedAt: [Date] {
-        get { _checkedAt.sorted() }
-        set { _checkedAt = newValue }
+    var checkedOn: [Date] {
+        get { _checkedOn.sorted() }
+        set { _checkedOn = newValue }
     }
     
-    var lastCheckedAt: Date? {
-        checkedAt.last
+    var lastCheckedOn: Date? {
+        checkedOn.last
+    }
+    var elapsedDays: Int? {
+        guard let lastChecked = lastCheckedOn else { return nil }
+        return Calendar.current.dateComponents([.day], from: lastChecked, to: Date.now).day
     }
     
     init(name: String, category: Category?) {

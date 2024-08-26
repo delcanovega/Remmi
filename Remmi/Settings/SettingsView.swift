@@ -17,6 +17,14 @@ struct SettingsView: View {
     var body: some View {
         NavigationStack {
             Form {
+                Section(header: Text("ITEMS")) {
+                    Picker("Last checked format", selection: $userPreferences.lastCheckedFormat) {
+                        ForEach(DateFormat.allCases, id: \.self) { option in
+                            Text(option.rawValue).tag(option)
+                        }
+                    }
+                }
+                
                 Section(header: Text("CATEGORIES")) {
                     Picker("Sort by", selection: $userPreferences.categorySorting) {
                         ForEach(SortOption.allCases, id: \.self) { option in

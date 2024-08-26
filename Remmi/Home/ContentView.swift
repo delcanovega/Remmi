@@ -72,8 +72,8 @@ struct ContentView: View {
                         ForEach(sortedCategories, id: \.self) { category in
                             Section(header: Text(category?.name ?? "")) {
                                 ForEach(itemsByCategory[category] ?? []) { item in
-                                    NavigationLink(destination: ItemView(item: item)) {
-                                        ItemListView(item: item)
+                                    NavigationLink(destination: ItemView(item: item, lastCheckedFormat: userPreferences.lastCheckedFormat)) {
+                                        ItemListView(item: item, lastCheckedFormat: userPreferences.lastCheckedFormat)
                                     }
                                 }
                             }
