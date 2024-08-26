@@ -17,18 +17,12 @@ struct ItemView: View {
     @State private var showingDeleteAlert = false
 
     @ObservedObject var item: Item
+    var lastCheckedFormat: DateFormat
     
     var body: some View {
         VStack {
             HStack {
-                VStack {
-                    Text("Last checked at")
-                    item.checkedAt.isEmpty ? Text("Never") : Text(item.lastCheckedAt!, style: .date)
-                }
-                .padding()
-                .frame(maxWidth: .infinity)
-                .background(.thickMaterial)
-                .cornerRadius(12)
+                LastCheckedView(lastCheckedFormat: lastCheckedFormat, lastCheckedOn: item.lastCheckedOn, elapsedDays: item.elapsedDays)
                 
                 CategoryMenu(selectedCategory: $item.category)
                     .padding()
@@ -38,9 +32,9 @@ struct ItemView: View {
             }
             .frame(height: 75)
             
-            MultiDatePicker("Checked at", selection: Binding(
-                get: { Set(item.checkedAt.map { calendar.dateComponents([.calendar, .era, .year, .month, .day], from: $0) }) },
-                set: { item.checkedAt = $0.compactMap { calendar.date(from: $0) } }
+            MultiDatePicker("Checked on", selection: Binding(
+                get: { Set(item.checkedOn.map { calendar.dateComponents([.calendar, .era, .year, .month, .day], from: $0) }) },
+                set: { item.checkedOn = $0.compactMap { calendar.date(from: $0) } }
             ))
             .frame(maxHeight: 500)
             
@@ -80,7 +74,7 @@ struct ItemView: View {
     do {
         let previewer = try Previewer()
         
-        return ItemView(item: previewer.item)
+        return ItemView(item: previewer.item, lastCheckedFormat: .absolute)
             .modelContainer(previewer.container)
     } catch {
         return Text("Failed to create preview: \(error.localizedDescription)")

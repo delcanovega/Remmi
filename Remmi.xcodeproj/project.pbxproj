@@ -17,6 +17,7 @@
 		EF2E22922BFE877F00A27FE9 /* AddItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2E22912BFE877F00A27FE9 /* AddItemView.swift */; };
 		EF2E22942BFFB5E200A27FE9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2E22932BFFB5E200A27FE9 /* AppDelegate.swift */; };
 		EF6536B12C46EA7100EA0CEC /* CategoryMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6536B02C46EA7100EA0CEC /* CategoryMenu.swift */; };
+		EF9992782C7CF87400F6E3FB /* LastCheckedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF9992772C7CF87400F6E3FB /* LastCheckedView.swift */; };
 		EFA25BD72C41C26E00B95CDB /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA25BD62C41C26E00B95CDB /* SettingsView.swift */; };
 		EFA25BDC2C42C7FB00B95CDB /* CategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA25BDB2C42C7FB00B95CDB /* CategoriesView.swift */; };
 		EFAA74E22C6A682F00A02B20 /* SortOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAA74E12C6A682F00A02B20 /* SortOption.swift */; };
@@ -25,6 +26,7 @@
 		EFC3E2F92C6ABC9600A34039 /* Previewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC3E2F82C6ABC9600A34039 /* Previewer.swift */; };
 		EFDB48AF2C42CAFE002C5DA3 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFDB48AE2C42CAFE002C5DA3 /* Category.swift */; };
 		EFE460262C6AAD260008A7EF /* ItemListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE460252C6AAD260008A7EF /* ItemListView.swift */; };
+		EFEC740B2C6AC3860098EEE2 /* DateFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFEC740A2C6AC3860098EEE2 /* DateFormat.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +41,7 @@
 		EF2E22912BFE877F00A27FE9 /* AddItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemView.swift; sourceTree = "<group>"; };
 		EF2E22932BFFB5E200A27FE9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EF6536B02C46EA7100EA0CEC /* CategoryMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryMenu.swift; sourceTree = "<group>"; };
+		EF9992772C7CF87400F6E3FB /* LastCheckedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastCheckedView.swift; sourceTree = "<group>"; };
 		EFA25BD62C41C26E00B95CDB /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		EFA25BDB2C42C7FB00B95CDB /* CategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesView.swift; sourceTree = "<group>"; };
 		EFAA74E12C6A682F00A02B20 /* SortOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortOption.swift; sourceTree = "<group>"; };
@@ -47,6 +50,7 @@
 		EFC3E2F82C6ABC9600A34039 /* Previewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Previewer.swift; sourceTree = "<group>"; };
 		EFDB48AE2C42CAFE002C5DA3 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		EFE460252C6AAD260008A7EF /* ItemListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemListView.swift; sourceTree = "<group>"; };
+		EFEC740A2C6AC3860098EEE2 /* DateFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormat.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +121,7 @@
 				EFAA74E32C6A7A2000A02B20 /* UserPreferences.swift */,
 				EFA25BDB2C42C7FB00B95CDB /* CategoriesView.swift */,
 				EFAA74E12C6A682F00A02B20 /* SortOption.swift */,
+				EFEC740A2C6AC3860098EEE2 /* DateFormat.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -145,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				EF2E228F2BFE7E2C00A27FE9 /* ItemView.swift */,
+				EF9992772C7CF87400F6E3FB /* LastCheckedView.swift */,
 			);
 			path = Details;
 			sourceTree = "<group>";
@@ -224,6 +230,7 @@
 				EFDB48AF2C42CAFE002C5DA3 /* Category.swift in Sources */,
 				EFC3E2F92C6ABC9600A34039 /* Previewer.swift in Sources */,
 				EFA25BD72C41C26E00B95CDB /* SettingsView.swift in Sources */,
+				EFEC740B2C6AC3860098EEE2 /* DateFormat.swift in Sources */,
 				EF2E22902BFE7E2C00A27FE9 /* ItemView.swift in Sources */,
 				EF2E22822BFE3E8300A27FE9 /* ContentView.swift in Sources */,
 				EF6536B12C46EA7100EA0CEC /* CategoryMenu.swift in Sources */,
@@ -232,6 +239,7 @@
 				EF2A529C2C260316002D1879 /* Item.swift in Sources */,
 				EF2E22802BFE3E8300A27FE9 /* RemmiApp.swift in Sources */,
 				EF2E22922BFE877F00A27FE9 /* AddItemView.swift in Sources */,
+				EF9992782C7CF87400F6E3FB /* LastCheckedView.swift in Sources */,
 				EFAA74E22C6A682F00A02B20 /* SortOption.swift in Sources */,
 				EFE460262C6AAD260008A7EF /* ItemListView.swift in Sources */,
 				EFC3E2F72C6AB9A600A34039 /* SortingLogic.swift in Sources */,

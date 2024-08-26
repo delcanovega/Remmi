@@ -8,5 +8,6 @@
 import SwiftUI
 
 class UserPreferences: ObservableObject {
+    @AppStorage("lastCheckedFormat") var lastCheckedFormat: DateFormat = .absolute
     @AppStorage("categorySorting") var categorySorting: SortOption = .name
 }
