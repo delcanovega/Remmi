@@ -25,7 +25,7 @@ struct ListView: View {
             ForEach(groupedByMonth.keys.sorted(), id: \.self) { month in
                 Section(header: Text(month)) {
                     ForEach(groupedByMonth[month]!.reversed(), id: \.self) { date in
-                        Text(date, style: .date) // Render the date
+                        Text(date, style: .date)
                     }
                 }
             }

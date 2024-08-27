@@ -9,7 +9,7 @@ import SwiftUI
 
 struct LastCheckedView: View {
     
-    var lastCheckedFormat: DateFormat
+    @State var lastCheckedFormat: DateFormat
     var lastCheckedOn: Date?
     var elapsedDays: Int?
     
@@ -20,7 +20,7 @@ struct LastCheckedView: View {
                 Text("checked")
             } else if (lastCheckedFormat == .absolute) {
                 Text("Last checked on")
-                Text(lastCheckedOn!, style: .date)
+                Text(formatDate(date: lastCheckedOn!))
             } else if (lastCheckedFormat == .relative) {
                 Text("Last checked")
                 if let days = elapsedDays {
@@ -34,13 +34,26 @@ struct LastCheckedView: View {
                 }
             }
         }
+        .onTapGesture {
+            if (lastCheckedFormat == .absolute) {
+                lastCheckedFormat = .relative
+            } else {
+                lastCheckedFormat = .absolute
+            }
+        }
         .padding()
         .frame(maxWidth: .infinity)
         .background(.thickMaterial)
         .cornerRadius(12)
     }
+    
+    func formatDate(date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "d MMM YYYY"
+        return dateFormatter.string(from: date)
+    }
 }
 
 #Preview {
-    LastCheckedView(lastCheckedFormat: .relative, lastCheckedOn: nil, elapsedDays: nil)
+    LastCheckedView(lastCheckedFormat: .absolute, lastCheckedOn: Date.now, elapsedDays: nil)
 }
