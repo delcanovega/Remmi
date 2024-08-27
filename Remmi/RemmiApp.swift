@@ -16,6 +16,7 @@ struct RemmiApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .font(.system(.body, design: .rounded))
         }
         .modelContainer(for: Category.self)
     }
