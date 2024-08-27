@@ -50,7 +50,7 @@ struct ItemView: View {
             case .calendar:
                 CalendarView(item: item)
             case .list:
-                ListView(checkedOnDates: item.checkedOn)
+                ListView(item: item)
             }
         }
         .navigationTitle(item.name)

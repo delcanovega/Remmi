@@ -9,13 +9,13 @@ import SwiftUI
 
 struct ListView: View {
     
-    var checkedOnDates: [Date]
-    
+    @ObservedObject var item: Item
+
     private var groupedByMonth: [String: [Date]] {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMMM yyyy"
         
-        return Dictionary(grouping: checkedOnDates) { date in
+        return Dictionary(grouping: item.checkedOn) { date in
             dateFormatter.string(from: date)
         }
     }
@@ -26,19 +26,33 @@ struct ListView: View {
                 Section(header: Text(month)) {
                     ForEach(groupedByMonth[month]!.reversed(), id: \.self) { date in
                         Text(date, style: .date)
+                            .padding(7)
+                    }
+                    .onDelete { indexSet in
+                        for index in indexSet {
+                            let date = groupedByMonth[month]!.reversed()[index]
+                            let dateIndex = item.checkedOn.firstIndex(of: date)
+                            item.checkedOn.remove(at: dateIndex!)
+                        }
                     }
                 }
             }
         }
-        .listStyle(.plain)
+        .listStyle(.inset)
+        .padding(.vertical)
+        .toolbar {
+            EditButton()
+        }
     }
 }
 
 #Preview {
-    ListView(checkedOnDates: [
-        Date(),
-        Calendar.current.date(byAdding: .day, value: -10, to: Date())!,
-        Calendar.current.date(byAdding: .month, value: -1, to: Date())!,
-        Calendar.current.date(byAdding: .month, value: -2, to: Date())!
-    ])
+    do {
+        let previewer = try Previewer()
+        
+        return ListView(item: previewer.item)
+            .modelContainer(previewer.container)
+    } catch {
+        return Text("Failed to create preview: \(error.localizedDescription)")
+    }
 }
