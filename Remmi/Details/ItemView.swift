@@ -8,16 +8,22 @@
 import SwiftData
 import SwiftUI
 
+enum ViewMode: String, CaseIterable {
+    case calendar = "Calendar"
+    case list = "List"
+}
+
 struct ItemView: View {
 
     @Environment(\.modelContext) var modelContext
-    @Environment(\.calendar) var calendar
     @Environment(\.dismiss) var dismiss
     
     @State private var showingDeleteAlert = false
 
     @ObservedObject var item: Item
     var lastCheckedFormat: DateFormat
+    
+    @State private var viewMode: ViewMode = .calendar
     
     var body: some View {
         VStack {
@@ -32,20 +38,19 @@ struct ItemView: View {
             }
             .frame(height: 75)
             
-            MultiDatePicker("Checked on", selection: Binding(
-                get: { Set(item.checkedOn.map { calendar.dateComponents([.calendar, .era, .year, .month, .day], from: $0) }) },
-                set: { item.checkedOn = $0.compactMap { calendar.date(from: $0) } }
-            ))
-            .frame(maxHeight: 500)
+            Picker("View Mode", selection: $viewMode) {
+                ForEach(ViewMode.allCases, id: \.self) { option in
+                    Text(option.rawValue).tag(option)
+                }
+            }
+            .pickerStyle(.segmented)
+            .padding(.top)
             
-            Spacer()
-            
-            HStack {
-                Spacer()
-                Image("details")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 240)
+            switch viewMode {
+            case .calendar:
+                CalendarView(item: item)
+            case .list:
+                ListView(checkedOnDates: item.checkedOn)
             }
         }
         .navigationTitle(item.name)
