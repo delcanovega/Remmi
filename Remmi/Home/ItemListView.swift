@@ -16,26 +16,28 @@ struct ItemListView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            Text(item.name)
-                .font(.headline)
+            Text(item.name).font(.headline)
             if (item.lastCheckedOn != nil) {
                 switch lastCheckedFormat {
                 case .absolute:
-                    Text("Last checked on \(Text(item.lastCheckedOn!, style: .date))")
-                        .font(.subheadline)
+                    Text(LocalizedStringKey("lastCheckedOn")).font(.subheadline)
+                    + Text(" ").font(.subheadline)
+                    + Text(item.lastCheckedOn!, style: .date).font(.subheadline)
                 case .relative:
                     if item.elapsedDays == 0 {
-                        Text("Last checked today").font(.subheadline)
+                        Text(LocalizedStringKey("lastCheckedToday")).font(.subheadline)
                     }
                     else if item.elapsedDays == 1 {
-                        Text("Last checked yesterday").font(.subheadline)
+                        Text(LocalizedStringKey("lastCheckedYesterday")).font(.subheadline)
                     }
                     else {
-                        Text("Last checked \(item.elapsedDays!) days ago").font(.subheadline)
+                        Text(LocalizedStringKey("lastChecked")).font(.subheadline)
+                        + Text(item.elapsedDays!, format: .number).font(.subheadline)
+                        + Text(LocalizedStringKey("daysAgo")).font(.subheadline)
                     }
                 }
             } else {
-                Text("Never checked").font(.subheadline)
+                Text(LocalizedStringKey("neverChecked")).font(.subheadline)
             }
             
         }
@@ -46,7 +48,7 @@ struct ItemListView: View {
     do {
         let previewer = try Previewer()
         
-        return ItemListView(item: previewer.item, lastCheckedFormat: .relative)
+        return ItemListView(item: previewer.item, lastCheckedFormat: .absolute)
             .modelContainer(previewer.container)
     } catch {
         return Text("Failed to create preview: \(error.localizedDescription)")

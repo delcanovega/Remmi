@@ -16,23 +16,23 @@ struct SettingsView: View {
     var body: some View {
         NavigationStack {
             Form {
-                Section(header: Text("ITEMS")) {
-                    Picker("Preferred date format", selection: $userPreferences.lastCheckedFormat) {
+                Section(header: Text(LocalizedStringKey("items"))) {
+                    Picker(LocalizedStringKey("preferredDateFormat"), selection: $userPreferences.lastCheckedFormat) {
                         ForEach(DateFormat.allCases, id: \.self) { option in
-                            Text(option.rawValue).tag(option)
+                            Text(LocalizedStringKey(option.rawValue)).tag(option)
                         }
                     }
                 }
                 
-                Section(header: Text("CATEGORIES")) {
-                    Picker("Sort by", selection: $userPreferences.categorySorting) {
+                Section(header: Text(LocalizedStringKey("categories"))) {
+                    Picker(LocalizedStringKey("sortBy"), selection: $userPreferences.categorySorting) {
                         ForEach(SortOption.allCases, id: \.self) { option in
-                            Text(option.rawValue).tag(option)
+                            Text(LocalizedStringKey(option.rawValue)).tag(option)
                         }
                     }
 
                     NavigationLink(destination: CategoriesView()) {
-                        Text("Manage categories")
+                        Text(LocalizedStringKey("manageCategories"))
                     }
                 }
             }
@@ -41,11 +41,12 @@ struct SettingsView: View {
                     Button {
                         dismiss()
                     } label: {
-                        Text("Close").font(.system(.body, design: .rounded))
+                        Text(LocalizedStringKey("close"))
+                            .font(.system(.body, design: .rounded))
                     }
                 }
             }
-            .navigationTitle("Settings")
+            .navigationTitle(LocalizedStringKey("settings"))
             .navigationBarTitleDisplayMode(.inline)
         }
     }

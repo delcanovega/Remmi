@@ -16,20 +16,22 @@ struct LastCheckedView: View {
     var body: some View {
         VStack {
             if (lastCheckedOn == nil) {
-                Text("Never")
-                Text("checked")
+                Text(LocalizedStringKey("never"))
+                Text(LocalizedStringKey("checked"))
             } else if (lastCheckedFormat == .absolute) {
-                Text("Last checked on")
+                Text(LocalizedStringKey("lastCheckedOn"))
                 Text(formatDate(date: lastCheckedOn!))
             } else if (lastCheckedFormat == .relative) {
-                Text("Last checked")
+                Text(LocalizedStringKey("lastCheck"))
                 if let days = elapsedDays {
                     if days == 0 {
-                        Text("today")
+                        Text(LocalizedStringKey("today"))
                     } else if days == 1 {
-                        Text("yesterday")
+                        Text(LocalizedStringKey("yesterday"))
                     } else {
-                        Text("\(days) days ago")
+                        Text(LocalizedStringKey("hace"))
+                        + Text(days, format: .number)
+                        + Text(LocalizedStringKey("days"))
                     }
                 }
             }
@@ -55,5 +57,5 @@ struct LastCheckedView: View {
 }
 
 #Preview {
-    LastCheckedView(lastCheckedFormat: .absolute, lastCheckedOn: Date.now, elapsedDays: nil)
+    LastCheckedView(lastCheckedFormat: .absolute, lastCheckedOn: Date.now, elapsedDays: 0)
 }

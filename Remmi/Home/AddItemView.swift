@@ -23,7 +23,7 @@ struct AddItemView: View {
         NavigationStack {
             VStack {
                 ZStack(alignment: .trailing) {
-                    TextField("Name", text: $name)
+                    TextField(LocalizedStringKey("name"), text: $name)
                         .font(.system(.body, design: .rounded))
                         .padding()
                         .background(.thickMaterial)
@@ -53,7 +53,7 @@ struct AddItemView: View {
                     Button {
                         dismiss()
                     } label: {
-                        Text("Cancel").font(.system(.body, design: .rounded))
+                        Text(LocalizedStringKey("cancel")).font(.system(.body, design: .rounded))
                     }
                 }
                 ToolbarItem(id: "save", placement: .confirmationAction) {
@@ -63,13 +63,13 @@ struct AddItemView: View {
                         saved = true
                         dismiss()
                     } label: {
-                        Text("Save").font(.system(.body, design: .rounded))
+                        Text(LocalizedStringKey("save")).font(.system(.body, design: .rounded))
                     }
                     .disabled(name == "")
                     .sensoryFeedback(.success, trigger: saved)
                 }
             }
-            .navigationTitle("Add Item")
+            .navigationTitle(LocalizedStringKey("addItem"))
             .navigationBarTitleDisplayMode(.inline)
         }
     }

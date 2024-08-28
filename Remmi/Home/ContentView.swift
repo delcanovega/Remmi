@@ -55,10 +55,10 @@ struct ContentView: View {
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
                                     .frame(width: 100)
-                                Text(filterText.isEmpty ? "NO TRACKED ITEMS" : "NO MATCHING RESULT")
+                                Text(filterText.isEmpty ? LocalizedStringKey("noItems") : LocalizedStringKey("noResults"))
                                     .font(.caption)
                                     .foregroundStyle(.black)
-                                Text("CLICK HERE TO ADD ONE")
+                                Text(LocalizedStringKey("tapToAddOne"))
                                     .font(.caption)
                                     .foregroundStyle(.black)
                             }
@@ -114,7 +114,7 @@ struct ContentView: View {
             }
             .sheet(isPresented: $showingAddItem) {
                 AddItemView()
-                    .presentationDetents([.fraction(0.22)])
+                    .presentationDetents([.fraction(0.3)])
                     .presentationCornerRadius(25)
             }
             .sheet(isPresented: $showingSettings) {

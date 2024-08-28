@@ -19,22 +19,26 @@ struct CategoryMenu: View {
     
     var body: some View {
         Menu {
-            Button("No Category", action: { selectedCategory = nil })
+            Button(LocalizedStringKey("No Category"), action: { selectedCategory = nil })
             ForEach(categories) { category in
                 Button(category.name, action: { selectedCategory = category } )
             }
             Button {
                 showingAddCategory = true
             } label: {
-                Label("Add New", systemImage: "plus")
+                Label(LocalizedStringKey("Add New"), systemImage: "plus")
             }
         } label: {
-            Label(selectedCategory?.name ?? "No Category", systemImage: "chevron.up.chevron.down")
+            Label {
+                Text(selectedCategory?.name ?? NSLocalizedString("No Category", comment: "No Category"))
+            } icon: {
+                Image(systemName: "chevron.up.chevron.down")
+            }
         }
-        .alert("Add new category", isPresented: $showingAddCategory) {
-            TextField("Name", text: $categoryName)
-            Button("Cancel") { }
-            Button("Confirm") {
+        .alert(LocalizedStringKey("Add new category"), isPresented: $showingAddCategory) {
+            TextField(LocalizedStringKey("Name"), text: $categoryName)
+            Button(LocalizedStringKey("Cancel")) { }
+            Button(LocalizedStringKey("Confirm")) {
                 selectedCategory = Category(name: categoryName)
                 categoryName = ""
             }

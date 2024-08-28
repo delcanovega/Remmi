@@ -40,7 +40,7 @@ struct ItemView: View {
             
             Picker("View Mode", selection: $viewMode) {
                 ForEach(ViewMode.allCases, id: \.self) { option in
-                    Text(option.rawValue).tag(option)
+                    Text(LocalizedStringKey(option.rawValue)).tag(option)
                 }
             }
             .pickerStyle(.segmented)
@@ -60,11 +60,11 @@ struct ItemView: View {
                 showingDeleteAlert = true
             }
         }
-        .alert("Delete tracked item", isPresented: $showingDeleteAlert) {
-            Button("Delete", role: .destructive, action: deleteItem)
-            Button("Cancel", role: .cancel) { }
+        .alert(LocalizedStringKey("deleteTitle"), isPresented: $showingDeleteAlert) {
+            Button(LocalizedStringKey("delete"), role: .destructive, action: deleteItem)
+            Button(LocalizedStringKey("cancel"), role: .cancel) { }
         } message: {
-            Text("Deleting an item will also remove all related check-ins. This action cannot be undone.")
+            Text(LocalizedStringKey("deleteDisclaimer"))
         }
     }
     

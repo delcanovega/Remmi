@@ -26,7 +26,7 @@ struct SearchView: View {
                     }
                 }
                 
-                TextField("Search", text: $filterText)
+                TextField(LocalizedStringKey("search"), text: $filterText)
                     .font(.system(.title3, design: .rounded))
                     .padding()
                     .background(Color(UIColor.systemGray5))

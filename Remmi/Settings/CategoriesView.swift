@@ -30,7 +30,7 @@ struct CategoriesView: View {
     var body: some View {
         VStack {
             HStack {
-                TextField("Name", text: $name)
+                TextField(LocalizedStringKey("name"), text: $name)
                     .font(.system(.body, design: .rounded))
                     .padding()
                     .background(Color(UIColor.systemGray5))
@@ -50,7 +50,7 @@ struct CategoriesView: View {
             }
             .padding(.horizontal)
             
-            Text(isNameRepeated ? "A category with that name already exists" : " ")
+            Text(isNameRepeated ? LocalizedStringKey("repeatedName") : " ")
                 .font(.footnote)
                 .foregroundStyle(.red)
             
@@ -64,10 +64,10 @@ struct CategoriesView: View {
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 160)
-                            Text("THERE ARE NO CATEGORIES")
+                            Text(LocalizedStringKey("noCategories"))
                                 .font(.caption)
                                 .foregroundStyle(.black)
-                            Text("TRY CREATING ONE")
+                            Text(LocalizedStringKey("tryCreatingOne"))
                                 .font(.caption)
                                 .foregroundStyle(.black)
                         }
@@ -80,8 +80,8 @@ struct CategoriesView: View {
                     ForEach(categories) { category in
                         HStack {
                             Text(category.name)
-                            Text("- \(category.items.count) items")
-                                .foregroundStyle(.gray)
+                            Text("- \(category.items.count) ").foregroundStyle(.gray)
+                            + Text(LocalizedStringKey("ite")).foregroundStyle(.gray)
                         }
                         .swipeActions {
                             Button {
@@ -98,8 +98,8 @@ struct CategoriesView: View {
                             }
                         }
                         .alert("Change category name", isPresented: $showingEdit) {
-                            TextField("Name", text: $editedName)
-                            Button("Cancel") {
+                            TextField(LocalizedStringKey("name"), text: $editedName)
+                            Button(LocalizedStringKey("cancel")) {
                             }
                             Button("Confirm") {
                                 category.name = editedName
@@ -114,7 +114,7 @@ struct CategoriesView: View {
                 }
             }
         }
-        .navigationTitle("Categories")
+        .navigationTitle(LocalizedStringKey("cat"))
     }
     
     func deleteCategories(at offsets: IndexSet) {
