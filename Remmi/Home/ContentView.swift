@@ -80,12 +80,18 @@ struct ContentView: View {
                         }
                     }
                 }
-                
-                SearchView(filterText: $filterText)
-                    .background(VStack {
-                        Color(UIColor.systemGray6)
-                        Color(UIColor.white)
-                    })
+                ZStack {
+                    SearchView(filterText: $filterText)
+                        .shadow(radius: 5)
+                        .background(VStack {
+                            Color(UIColor.systemGray6)
+                            Color(UIColor.white)
+                        })
+                    Rectangle()
+                        .fill(Color.white)
+                        .frame(height: 40)
+                        .offset(y: 60)
+                }
             }
             .toolbar(id: "home") {
                 ToolbarItem(id: "title", placement: .navigationBarLeading) {
