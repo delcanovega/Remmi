@@ -286,13 +286,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "days ago"
+            "value" : " days ago"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "días"
+            "value" : " días"
           }
         }
       }
@@ -497,13 +497,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Last checked"
+            "value" : "Last checked "
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Última entrada hace"
+            "value" : "Última entrada hace "
           }
         }
       }
