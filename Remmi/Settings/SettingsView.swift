@@ -9,7 +9,6 @@ import SwiftUI
 
 struct SettingsView: View {
 
-    @Environment(\.modelContext) var modelContext
     @Environment(\.dismiss) var dismiss
     
     @ObservedObject var userPreferences: UserPreferences
@@ -18,7 +17,7 @@ struct SettingsView: View {
         NavigationStack {
             Form {
                 Section(header: Text("ITEMS")) {
-                    Picker("Last checked format", selection: $userPreferences.lastCheckedFormat) {
+                    Picker("Preferred date format", selection: $userPreferences.lastCheckedFormat) {
                         ForEach(DateFormat.allCases, id: \.self) { option in
                             Text(option.rawValue).tag(option)
                         }
@@ -34,18 +33,6 @@ struct SettingsView: View {
 
                     NavigationLink(destination: CategoriesView()) {
                         Text("Manage categories")
-                    }
-                }
-                
-                Section(header: Text("DEV")) {
-                    Button("Delete tracked items") {
-                        do {
-                            try modelContext.delete(model: Item.self)
-                            try modelContext.delete(model: Category.self)
-                            dismiss()
-                        } catch {
-                            print("Failed to clear Items")
-                        }
                     }
                 }
             }

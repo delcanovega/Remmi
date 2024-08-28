@@ -39,7 +39,7 @@ struct ListView: View {
             }
         }
         .listStyle(.inset)
-        .padding(.vertical)
+        .padding(.top)
         .toolbar {
             EditButton()
         }

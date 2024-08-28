@@ -64,7 +64,7 @@ struct ItemView: View {
             Button("Delete", role: .destructive, action: deleteItem)
             Button("Cancel", role: .cancel) { }
         } message: {
-            Text("Are you sure?")
+            Text("Deleting an item will also remove all related check-ins. This action cannot be undone.")
         }
     }
     

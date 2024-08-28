@@ -19,6 +19,7 @@ struct CalendarView: View {
                 get: { Set(item.checkedOn.map { calendar.dateComponents([.calendar, .era, .year, .month, .day], from: $0) }) },
                 set: { item.checkedOn = $0.compactMap { calendar.date(from: $0) } }
             ), in: Date.distantPast..<Date.now)
+            .sensoryFeedback(.success, trigger: item.checkedOn)
             .frame(maxHeight: 500)
             
             Spacer()

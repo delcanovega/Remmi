@@ -15,6 +15,7 @@ struct AddItemView: View {
         
     @State private var name: String = ""
     @State private var selectedCategory: Category? = nil
+    @State private var saved: Bool = false
     
     @FocusState private var isFocused: Bool
 
@@ -30,6 +31,7 @@ struct AddItemView: View {
                         .focused($isFocused)
                         .onAppear {
                             isFocused = true
+                            saved = false
                         }
                     
                     if !name.isEmpty {
@@ -58,11 +60,13 @@ struct AddItemView: View {
                     Button {
                         let item = Item(name: name, category: selectedCategory)
                         modelContext.insert(item)
+                        saved = true
                         dismiss()
                     } label: {
                         Text("Save").font(.system(.body, design: .rounded))
                     }
                     .disabled(name == "")
+                    .sensoryFeedback(.success, trigger: saved)
                 }
             }
             .navigationTitle("Add Item")
