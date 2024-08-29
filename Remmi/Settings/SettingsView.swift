@@ -18,20 +18,30 @@ struct SettingsView: View {
             Form {
                 Section {
                     NavigationLink(destination: CategoriesView()) {
-                        Text("Manage categories")
+                        Label {
+                            Text("Manage categories")
+                        } icon: {
+                            Image(systemName: "tray").foregroundColor(.black)
+                        }
                     }
                 }
                 
                 Section {
-                    Picker("Preferred date format", selection: $userPreferences.lastCheckedFormat) {
+                    Picker(selection: $userPreferences.lastCheckedFormat) {
                         ForEach(DateFormat.allCases, id: \.self) { option in
                             Text(LocalizedStringKey(option.rawValue)).tag(option)
                         }
+                    } label: {
+                        Label("Preferred date format", systemImage: "clock.arrow.circlepath")
+                            .foregroundColor(.black)
                     }
-                    Picker("Sort by", selection: $userPreferences.categorySorting) {
+                    Picker(selection: $userPreferences.categorySorting) {
                         ForEach(SortOption.allCases, id: \.self) { option in
                             Text(LocalizedStringKey(option.rawValue)).tag(option)
                         }
+                    } label: {
+                        Label("Sort by", systemImage: "arrow.up.arrow.down")
+                            .foregroundColor(.black)
                     }
                 } header: {
                     Text("Preferences")
@@ -40,7 +50,11 @@ struct SettingsView: View {
                 
                 Section {
                     NavigationLink(destination: CreditsView()) {
-                        Text("Credits", comment: "Attributions")
+                        Label {
+                            Text("Credits", comment: "Attributions")
+                        } icon: {
+                            Image(systemName: "heart").foregroundColor(.black)
+                        }
                     }
                 } header: {
                     Text("More", comment: "Miscelaneous section")
