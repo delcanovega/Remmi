@@ -28,6 +28,7 @@
 		EFC3E2F72C6AB9A600A34039 /* SortingLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC3E2F62C6AB9A600A34039 /* SortingLogic.swift */; };
 		EFC3E2F92C6ABC9600A34039 /* Previewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC3E2F82C6ABC9600A34039 /* Previewer.swift */; };
 		EFDB48AF2C42CAFE002C5DA3 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFDB48AE2C42CAFE002C5DA3 /* Category.swift */; };
+		EFDD98282C80DEFB00995203 /* CreditsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFDD98272C80DEFB00995203 /* CreditsView.swift */; };
 		EFE460262C6AAD260008A7EF /* ItemListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE460252C6AAD260008A7EF /* ItemListView.swift */; };
 		EFEC740B2C6AC3860098EEE2 /* DateFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFEC740A2C6AC3860098EEE2 /* DateFormat.swift */; };
 /* End PBXBuildFile section */
@@ -55,6 +56,7 @@
 		EFC3E2F62C6AB9A600A34039 /* SortingLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortingLogic.swift; sourceTree = "<group>"; };
 		EFC3E2F82C6ABC9600A34039 /* Previewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Previewer.swift; sourceTree = "<group>"; };
 		EFDB48AE2C42CAFE002C5DA3 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		EFDD98272C80DEFB00995203 /* CreditsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsView.swift; sourceTree = "<group>"; };
 		EFE460252C6AAD260008A7EF /* ItemListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemListView.swift; sourceTree = "<group>"; };
 		EFEC740A2C6AC3860098EEE2 /* DateFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormat.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -129,6 +131,7 @@
 				EFA25BDB2C42C7FB00B95CDB /* CategoriesView.swift */,
 				EFAA74E12C6A682F00A02B20 /* SortOption.swift */,
 				EFEC740A2C6AC3860098EEE2 /* DateFormat.swift */,
+				EFDD98272C80DEFB00995203 /* CreditsView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -259,6 +262,7 @@
 				EFA25BDC2C42C7FB00B95CDB /* CategoriesView.swift in Sources */,
 				EF2A529C2C260316002D1879 /* Item.swift in Sources */,
 				EF2E22802BFE3E8300A27FE9 /* RemmiApp.swift in Sources */,
+				EFDD98282C80DEFB00995203 /* CreditsView.swift in Sources */,
 				EF2E22922BFE877F00A27FE9 /* AddItemView.swift in Sources */,
 				EF9992782C7CF87400F6E3FB /* LastCheckedView.swift in Sources */,
 				EFAA74E22C6A682F00A02B20 /* SortOption.swift in Sources */,

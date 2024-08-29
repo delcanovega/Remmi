@@ -35,6 +35,15 @@ struct SettingsView: View {
                         Text(LocalizedStringKey("manageCategories"))
                     }
                 }
+                
+                Section {
+                    NavigationLink(destination: CreditsView()) {
+                        Text("Credits", comment: "Attributions")
+                    }
+                } header: {
+                    Text("More", comment: "Miscelaneous section")
+                        .font(.system(size: 14, weight: .semibold, design: .rounded))
+                }
             }
             .toolbar(id: "settings") {
                 ToolbarItem(id: "close", placement: .cancellationAction) {

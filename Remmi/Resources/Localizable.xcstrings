@@ -263,6 +263,27 @@
         }
       }
     },
+    "Created by Andinur - Flaticon" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Creado por Andinur - Flaticon"
+          }
+        }
+      }
+    },
+    "Credits" : {
+      "comment" : "Attributions",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Créditos"
+          }
+        }
+      }
+    },
     "days" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -392,6 +413,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Editar"
+          }
+        }
+      }
+    },
+    "Empty State Icons" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Empty State Icons"
           }
         }
       }
@@ -589,6 +620,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Administrar categorías"
+          }
+        }
+      }
+    },
+    "More" : {
+      "comment" : "Miscelaneous section",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Más"
           }
         }
       }
