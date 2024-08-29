@@ -16,24 +16,26 @@ struct SettingsView: View {
     var body: some View {
         NavigationStack {
             Form {
-                Section(header: Text(LocalizedStringKey("items"))) {
-                    Picker(LocalizedStringKey("preferredDateFormat"), selection: $userPreferences.lastCheckedFormat) {
+                Section {
+                    NavigationLink(destination: CategoriesView()) {
+                        Text("Manage categories")
+                    }
+                }
+                
+                Section {
+                    Picker("Preferred date format", selection: $userPreferences.lastCheckedFormat) {
                         ForEach(DateFormat.allCases, id: \.self) { option in
                             Text(LocalizedStringKey(option.rawValue)).tag(option)
                         }
                     }
-                }
-                
-                Section(header: Text(LocalizedStringKey("categories"))) {
-                    Picker(LocalizedStringKey("sortBy"), selection: $userPreferences.categorySorting) {
+                    Picker("Sort by", selection: $userPreferences.categorySorting) {
                         ForEach(SortOption.allCases, id: \.self) { option in
                             Text(LocalizedStringKey(option.rawValue)).tag(option)
                         }
                     }
-
-                    NavigationLink(destination: CategoriesView()) {
-                        Text(LocalizedStringKey("manageCategories"))
-                    }
+                } header: {
+                    Text("Preferences")
+                        .font(.system(size: 14, weight: .semibold, design: .rounded))
                 }
                 
                 Section {
@@ -50,12 +52,12 @@ struct SettingsView: View {
                     Button {
                         dismiss()
                     } label: {
-                        Text(LocalizedStringKey("close"))
+                        Text("Close")
                             .font(.system(.body, design: .rounded))
                     }
                 }
             }
-            .navigationTitle(LocalizedStringKey("settings"))
+            .navigationTitle("Settings")
             .navigationBarTitleDisplayMode(.inline)
         }
     }
