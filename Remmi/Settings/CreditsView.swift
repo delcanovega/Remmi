@@ -22,7 +22,7 @@ struct CreditsView: View {
             }
             .foregroundStyle(.primary)
         }
-        .navigationTitle("Credits")
+        .navigationTitle("Acknowledgments")
     }
 }
 

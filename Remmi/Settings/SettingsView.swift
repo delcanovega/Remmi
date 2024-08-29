@@ -12,10 +12,17 @@ struct SettingsView: View {
     @Environment(\.dismiss) var dismiss
     
     @ObservedObject var userPreferences: UserPreferences
+    
+    private var appVersion: String {
+        Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "Unknown"
+    }
+    private var appBuild: String {
+        Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "Unknown"
+    }
 
     var body: some View {
         NavigationStack {
-            Form {
+            List {
                 Section {
                     NavigationLink(destination: CategoriesView()) {
                         Label {
@@ -51,7 +58,7 @@ struct SettingsView: View {
                 Section {
                     NavigationLink(destination: CreditsView()) {
                         Label {
-                            Text("Credits", comment: "Attributions")
+                            Text("Acknowledgments", comment: "Credits and more")
                         } icon: {
                             Image(systemName: "heart").foregroundColor(.black)
                         }
@@ -59,6 +66,16 @@ struct SettingsView: View {
                 } header: {
                     Text("More", comment: "Miscelaneous section")
                         .font(.system(size: 14, weight: .semibold, design: .rounded))
+                }
+                
+                Section {
+                    
+                } footer: {
+                    HStack {
+                        Spacer()
+                        Text("Remmi \(appVersion) (\(appBuild))").font(.footnote)
+                        Spacer()
+                    }
                 }
             }
             .toolbar(id: "settings") {

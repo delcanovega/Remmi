@@ -48,6 +48,9 @@
         }
       }
     },
+    "Acknowledgments" : {
+      "comment" : "Credits and more"
+    },
     "Add New" : {
       "localizations" : {
         "en" : {
@@ -285,6 +288,7 @@
     },
     "Credits" : {
       "comment" : "Attributions",
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -856,6 +860,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Remmi"
+          }
+        }
+      }
+    },
+    "Remmi %@ (%@)" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Remmi %1$@ (%2$@)"
           }
         }
       }
