@@ -29,10 +29,9 @@ struct CategoryMenu: View {
                 Label(LocalizedStringKey("Add New"), systemImage: "plus")
             }
         } label: {
-            Label {
-                Text(selectedCategory?.name ?? NSLocalizedString("No Category", comment: "No Category"))
-            } icon: {
+            HStack {
                 Image(systemName: "chevron.up.chevron.down")
+                Text(selectedCategory?.name ?? NSLocalizedString("No Category", comment: "No Category"))
             }
         }
         .alert(LocalizedStringKey("Add new category"), isPresented: $showingAddCategory) {
