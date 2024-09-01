@@ -26,13 +26,13 @@ struct SearchView: View {
                     }
                 }
                 
-                TextField(LocalizedStringKey("search"), text: $filterText)
+                TextField("Search", text: $filterText)
+                    .disableAutocorrection(true)
                     .font(.system(.title3, design: .rounded))
                     .padding()
                     .background(Color(UIColor.systemGray5))
                     .cornerRadius(12)
                     .focused($isFocused)
-                    .disableAutocorrection(true)
             }
             .padding()
                 
@@ -46,15 +46,6 @@ struct SearchView: View {
                     }
             }
         }
-        .background(.white)
-        .clipShape(
-            .rect(
-                topLeadingRadius: 25,
-                bottomLeadingRadius: 0,
-                bottomTrailingRadius: 0,
-                topTrailingRadius: 25
-            )
-        )
     }
 }
 

@@ -38,7 +38,7 @@ struct ContentView: View {
                 }
             }
     }
-
+    @State private var showingSearch = true
     @State private var showingAddItem = false
     @State private var showingSettings = false
 
@@ -80,18 +80,6 @@ struct ContentView: View {
                         }
                     }
                 }
-                ZStack {
-                    SearchView(filterText: $filterText)
-                        .shadow(radius: 5)
-                        .background(VStack {
-                            Color(UIColor.systemGray6)
-                            Color(UIColor.white)
-                        })
-                    Rectangle()
-                        .fill(Color.white)
-                        .frame(height: 40)
-                        .offset(y: 60)
-                }
             }
             .toolbar(id: "home") {
                 ToolbarItem(id: "title", placement: .navigationBarLeading) {
@@ -118,14 +106,21 @@ struct ContentView: View {
                     }
                 }
             }
-            .sheet(isPresented: $showingAddItem) {
-                AddItemView()
-                    .presentationDetents([.fraction(0.3)])
+            .sheet(isPresented: $showingSearch) {
+                SearchView(filterText: $filterText)
+                    .presentationDetents([.fraction(0.13)])
+                    .presentationBackgroundInteraction(.enabled(upThrough: .fraction(0.13)))
                     .presentationCornerRadius(25)
-            }
-            .sheet(isPresented: $showingSettings) {
-                SettingsView(userPreferences: userPreferences)
-                    .presentationCornerRadius(25)
+                    .interactiveDismissDisabled()
+                    .sheet(isPresented: $showingAddItem) {
+                        AddItemView()
+                            .presentationDetents([.fraction(0.3)])
+                            .presentationCornerRadius(25)
+                    }
+                    .sheet(isPresented: $showingSettings) {
+                        SettingsView(userPreferences: userPreferences)
+                            .presentationCornerRadius(25)
+                    }
             }
             .preferredColorScheme(.light)
         }
