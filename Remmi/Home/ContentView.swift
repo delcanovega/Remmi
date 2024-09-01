@@ -73,7 +73,7 @@ struct ContentView: View {
                             Section(header: Text(category?.name ?? "")) {
                                 ForEach(itemsByCategory[category] ?? []) { item in
                                     NavigationLink(destination: ItemView(item: item, lastCheckedFormat: userPreferences.lastCheckedFormat)) {
-                                        ItemListView(item: item, lastCheckedFormat: userPreferences.lastCheckedFormat)
+                                        ItemListView(item: item)
                                     }
                                 }
                             }

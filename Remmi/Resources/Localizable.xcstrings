@@ -31,6 +31,9 @@
         }
       }
     },
+    "--" : {
+
+    },
     "Absolute" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -49,7 +52,15 @@
       }
     },
     "Acknowledgments" : {
-      "comment" : "Credits and more"
+      "comment" : "Credits and more",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Agradecimientos"
+          }
+        }
+      }
     },
     "Add New" : {
       "localizations" : {
@@ -286,17 +297,8 @@
         }
       }
     },
-    "Credits" : {
-      "comment" : "Attributions",
-      "extractionState" : "stale",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Créditos"
-          }
-        }
-      }
+    "DAY" : {
+
     },
     "days" : {
       "extractionState" : "manual",
@@ -314,6 +316,9 @@
           }
         }
       }
+    },
+    "DAYS" : {
+
     },
     "daysAgo" : {
       "extractionState" : "manual",
@@ -709,6 +714,9 @@
         }
       }
     },
+    "Never checked" : {
+
+    },
     "neverChecked" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -869,6 +877,12 @@
         "en" : {
           "stringUnit" : {
             "state" : "new",
+            "value" : "Remmi %1$@ (%2$@)"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
             "value" : "Remmi %1$@ (%2$@)"
           }
         }
