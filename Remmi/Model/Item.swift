@@ -28,8 +28,9 @@ class Item {
         return Calendar.current.dateComponents([.day], from: lastChecked, to: Date.now).day
     }
     
-    init(name: String) {
+    init(name: String, lastCheckedOn: Date) {
         self.name = name
+        self.checkedOn = [lastCheckedOn]
     }
 
 }

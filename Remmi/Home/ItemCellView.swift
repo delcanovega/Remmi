@@ -39,5 +39,5 @@ struct ItemCellView: View {
 }
 
 #Preview {
-    ItemCellView(item: Item(name: "Test"))
+    ItemCellView(item: Item(name: "Test", lastCheckedOn: .now))
 }

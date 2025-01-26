@@ -14,7 +14,7 @@ struct AddItemView: View {
     @Environment(\.dismiss) var dismiss
         
     @State private var name: String = ""
-    @State private var lastCheckedOn: Date = Date.now
+    @State private var lastCheckedOn: Date = .now
     
     @State private var saved: Bool = false
     
@@ -29,9 +29,8 @@ struct AddItemView: View {
                         isFocused = true
                     }
                 
-                DatePicker(selection: $lastCheckedOn, in: ...Date.now, displayedComponents: .date) {
-                    Text("Last checked on")
-                }
+                DatePicker("Last checked on", selection: $lastCheckedOn, in: ...Date.now, displayedComponents: .date)
+                
             }
             .toolbar(id: "addItem") {
                 ToolbarItem(id: "cancel", placement: .cancellationAction) {
@@ -43,7 +42,7 @@ struct AddItemView: View {
                 }
                 ToolbarItem(id: "save", placement: .confirmationAction) {
                     Button {
-                        let item = Item(name: name)
+                        let item = Item(name: name, lastCheckedOn: lastCheckedOn)
                         modelContext.insert(item)
                         saved = true
                         dismiss()

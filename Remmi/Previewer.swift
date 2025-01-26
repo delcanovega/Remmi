@@ -17,7 +17,7 @@ struct Previewer {
         let config = ModelConfiguration(isStoredInMemoryOnly: true)
         container = try ModelContainer(for: Item.self, configurations: config)
 
-        item = Item(name: "Monstera")
+        item = Item(name: "Monstera", lastCheckedOn: .now)
         item.checkedOn = [
             Date(), // Today
             Calendar.current.date(byAdding: .day, value: -10, to: Date())!,
