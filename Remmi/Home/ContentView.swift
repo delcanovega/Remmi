@@ -16,8 +16,12 @@ struct ContentView: View {
         
     @State private var filterText = ""
 
-    @Query // TODO JCA: filter and sort
+    @Query
     var items: [Item]
+    
+    private var filteredItems: [Item] {
+        items.filter { filterText.isEmpty || $0.name.localizedCaseInsensitiveContains(filterText) }
+    }
     
     private var showingSearch: Bool { navigationPath.isEmpty }
     @State private var showingAddItem = false
@@ -26,7 +30,7 @@ struct ContentView: View {
     var body: some View {
         NavigationStack(path: $navigationPath) {
             List {
-                ForEach(items) { item in
+                ForEach(filteredItems) { item in
                     NavigationLink(value: item) {
                         ItemCellView(item: item)
                     }
