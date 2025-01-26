@@ -9,10 +9,9 @@ import Foundation
 import SwiftData
 
 @Model
-class Item: Identifiable, ObservableObject {
-    let id = UUID()
+class Item {
+    
     var name: String
-    var category: Category?
     private var _checkedOn: [Date] = []
     
     var checkedOn: [Date] {
@@ -23,14 +22,14 @@ class Item: Identifiable, ObservableObject {
     var lastCheckedOn: Date? {
         checkedOn.last
     }
+    
     var elapsedDays: Int? {
         guard let lastChecked = lastCheckedOn else { return nil }
         return Calendar.current.dateComponents([.day], from: lastChecked, to: Date.now).day
     }
     
-    init(name: String, category: Category?) {
+    init(name: String) {
         self.name = name
-        self.category = category
     }
-    
+
 }

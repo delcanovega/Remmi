@@ -12,74 +12,29 @@ struct ContentView: View {
     
     @Environment(\.modelContext) var modelContext
     
+    @State private var navigationPath = NavigationPath()
+        
     @State private var filterText = ""
-    @StateObject private var userPreferences = UserPreferences()
 
-    @Query var items: [Item]
-    private var filteredItems: [Item] {
-        items.filter { item in
-            let matchesName = item.name.lowercased().contains(filterText.lowercased())
-            let matchesCategory = item.category?.name.lowercased().contains(filterText.lowercased()) ?? false
-            return filterText.isEmpty || matchesName || matchesCategory
-        }
-    }
-    private var itemsByCategory: [Category?: [Item]] {
-        Dictionary(grouping: filteredItems, by: { $0.category })
-    }
-    private var sortedCategories: [Category?] {
-        itemsByCategory.keys
-            .sorted {
-                switch userPreferences.categorySorting {
-                case .name:
-                    return sortByName(left: $0, right: $1)
-                    
-                case .lastChecked:
-                    return sortByLastChecked(left: $0, right: $1)
-                }
-            }
-    }
-    @State private var showingSearch = true
+    @Query // TODO JCA: filter and sort
+    var items: [Item]
+    
+    private var showingSearch: Bool { navigationPath.isEmpty }
     @State private var showingAddItem = false
     @State private var showingSettings = false
 
     var body: some View {
-        NavigationStack {
-            VStack(spacing: 0) {
-                if filteredItems.isEmpty {
-                    List {
-                        Button {
-                            showingAddItem = true
-                        } label: {
-                            VStack {
-                                Image("empty")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 100)
-                                Text(filterText.isEmpty ? LocalizedStringKey("noItems") : LocalizedStringKey("noResults"))
-                                    .font(.caption)
-                                    .foregroundStyle(.black)
-                                Text(LocalizedStringKey("tapToAddOne"))
-                                    .font(.caption)
-                                    .foregroundStyle(.black)
-                            }
-                            .padding(.vertical)
-                            .frame(maxWidth: .infinity)
-                        }
-                    }
-                    .scrollDisabled(true)
-                } else {
-                    List {
-                        ForEach(sortedCategories, id: \.self) { category in
-                            Section(header: Text(category?.name ?? "")) {
-                                ForEach(itemsByCategory[category] ?? []) { item in
-                                    NavigationLink(destination: ItemView(item: item, lastCheckedFormat: userPreferences.lastCheckedFormat)) {
-                                        ItemListView(item: item)
-                                    }
-                                }
-                            }
-                        }
+        NavigationStack(path: $navigationPath) {
+            List {
+                ForEach(items) { item in
+                    NavigationLink(value: item) {
+                        ItemCellView(item: item)
                     }
                 }
+            }
+            .navigationDestination(for: Item.self) {
+                // TODO JCA: ItemDetails
+                Text($0.name)
             }
             .toolbar(id: "home") {
                 ToolbarItem(id: "title", placement: .navigationBarLeading) {
@@ -106,19 +61,18 @@ struct ContentView: View {
                     }
                 }
             }
-            .sheet(isPresented: $showingSearch) {
+            .sheet(isPresented: .constant(showingSearch)) {
                 SearchView(filterText: $filterText)
+                    .presentationCornerRadius(25)
                     .presentationDetents([.fraction(0.13)])
                     .presentationBackgroundInteraction(.enabled(upThrough: .fraction(0.13)))
-                    .presentationCornerRadius(25)
                     .interactiveDismissDisabled()
                     .sheet(isPresented: $showingAddItem) {
                         AddItemView()
-                            .presentationDetents([.fraction(0.3)])
                             .presentationCornerRadius(25)
                     }
                     .sheet(isPresented: $showingSettings) {
-                        SettingsView(userPreferences: userPreferences)
+                        SettingsView()
                             .presentationCornerRadius(25)
                     }
             }

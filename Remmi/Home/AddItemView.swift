@@ -2,7 +2,7 @@
 //  AddItemView.swift
 //  Remmi
 //
-//  Created by Juan Ramón del Caño Vega on 22/5/24.
+//  Created by Juan Ramón del Caño Vega on 5/12/24.
 //
 
 import SwiftData
@@ -14,62 +14,47 @@ struct AddItemView: View {
     @Environment(\.dismiss) var dismiss
         
     @State private var name: String = ""
-    @State private var selectedCategory: Category? = nil
+    @State private var lastCheckedOn: Date = Date.now
+    
     @State private var saved: Bool = false
     
     @FocusState private var isFocused: Bool
 
     var body: some View {
         NavigationStack {
-            VStack {
-                ZStack(alignment: .trailing) {
-                    TextField(LocalizedStringKey("name"), text: $name)
-                        .font(.system(.body, design: .rounded))
-                        .padding()
-                        .background(.thickMaterial)
-                        .cornerRadius(12)
-                        .focused($isFocused)
-                        .onAppear {
-                            isFocused = true
-                            saved = false
-                        }
-                    
-                    if !name.isEmpty {
-                        Button("", systemImage: "xmark.circle.fill", action: { name = "" })
-                            .font(.title3)
-                            .padding(.trailing)
-                            .foregroundColor(.secondary)
+            Form {
+                TextField("Name", text: $name)
+                    .focused($isFocused)
+                    .onAppear {
+                        isFocused = true
                     }
+                
+                DatePicker(selection: $lastCheckedOn, in: ...Date.now, displayedComponents: .date) {
+                    Text("Last checked on")
                 }
-                CategoryMenu(selectedCategory: $selectedCategory)
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .background(.thickMaterial)
-                    .cornerRadius(12)
             }
-            .padding(.horizontal)
             .toolbar(id: "addItem") {
-                ToolbarItem(id: "Cancel", placement: .cancellationAction) {
+                ToolbarItem(id: "cancel", placement: .cancellationAction) {
                     Button {
                         dismiss()
                     } label: {
-                        Text(LocalizedStringKey("cancel")).font(.system(.body, design: .rounded))
+                        Text("Cancel").font(.system(.body, design: .rounded))
                     }
                 }
                 ToolbarItem(id: "save", placement: .confirmationAction) {
                     Button {
-                        let item = Item(name: name, category: selectedCategory)
+                        let item = Item(name: name)
                         modelContext.insert(item)
                         saved = true
                         dismiss()
                     } label: {
-                        Text(LocalizedStringKey("save")).font(.system(.body, design: .rounded))
+                        Text("Save").font(.system(.body, design: .rounded))
                     }
                     .disabled(name == "")
                     .sensoryFeedback(.success, trigger: saved)
                 }
             }
-            .navigationTitle(LocalizedStringKey("addItem"))
+            .navigationTitle("Add Item")
             .navigationBarTitleDisplayMode(.inline)
         }
     }

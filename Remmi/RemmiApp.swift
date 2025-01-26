@@ -18,6 +18,6 @@ struct RemmiApp: App {
             ContentView()
                 .font(.system(.body, design: .rounded))
         }
-        .modelContainer(for: Category.self)
+        .modelContainer(for: Item.self)
     }
 }
