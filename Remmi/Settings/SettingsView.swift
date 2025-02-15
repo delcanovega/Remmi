@@ -8,41 +8,27 @@
 import SwiftUI
 
 struct SettingsView: View {
-
-    @Environment(\.dismiss) var dismiss
     
-    @ObservedObject var userPreferences: UserPreferences
+    @Environment(\.dismiss) var dismiss
+
+    private var appVersion: String {
+        Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "Unknown"
+    }
+    private var appBuild: String {
+        Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "Unknown"
+    }
 
     var body: some View {
         NavigationStack {
-            Form {
-                Section(header: Text(LocalizedStringKey("items"))) {
-                    Picker(LocalizedStringKey("preferredDateFormat"), selection: $userPreferences.lastCheckedFormat) {
-                        ForEach(DateFormat.allCases, id: \.self) { option in
-                            Text(LocalizedStringKey(option.rawValue)).tag(option)
-                        }
-                    }
-                }
-                
-                Section(header: Text(LocalizedStringKey("categories"))) {
-                    Picker(LocalizedStringKey("sortBy"), selection: $userPreferences.categorySorting) {
-                        ForEach(SortOption.allCases, id: \.self) { option in
-                            Text(LocalizedStringKey(option.rawValue)).tag(option)
-                        }
-                    }
-
-                    NavigationLink(destination: CategoriesView()) {
-                        Text(LocalizedStringKey("manageCategories"))
-                    }
-                }
-                
+            List {
                 Section {
-                    NavigationLink(destination: CreditsView()) {
-                        Text("Credits", comment: "Attributions")
+                    
+                } footer: {
+                    HStack {
+                        Spacer()
+                        Text("Remmi \(appVersion) (\(appBuild))").font(.footnote)
+                        Spacer()
                     }
-                } header: {
-                    Text("More", comment: "Miscelaneous section")
-                        .font(.system(size: 14, weight: .semibold, design: .rounded))
                 }
             }
             .toolbar(id: "settings") {
@@ -50,17 +36,16 @@ struct SettingsView: View {
                     Button {
                         dismiss()
                     } label: {
-                        Text(LocalizedStringKey("close"))
-                            .font(.system(.body, design: .rounded))
+                        Text("Close")
                     }
                 }
             }
-            .navigationTitle(LocalizedStringKey("settings"))
+            .navigationTitle("Settings")
             .navigationBarTitleDisplayMode(.inline)
         }
     }
 }
 
 #Preview {
-    SettingsView(userPreferences: UserPreferences())
+    SettingsView()
 }

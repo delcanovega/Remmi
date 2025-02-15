@@ -11,15 +11,13 @@ import SwiftData
 @MainActor
 struct Previewer {
     let container: ModelContainer
-    let category: Category
     let item: Item
 
     init() throws {
         let config = ModelConfiguration(isStoredInMemoryOnly: true)
-        container = try ModelContainer(for: Category.self, configurations: config)
+        container = try ModelContainer(for: Item.self, configurations: config)
 
-        category = Category(name: "Plants")
-        item = Item(name: "Monstera", category: category)
+        item = Item(name: "Monstera", lastCheckedOn: .now)
         item.checkedOn = [
             Date(), // Today
             Calendar.current.date(byAdding: .day, value: -10, to: Date())!,

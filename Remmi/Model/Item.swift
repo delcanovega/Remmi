@@ -9,28 +9,25 @@ import Foundation
 import SwiftData
 
 @Model
-class Item: Identifiable, ObservableObject {
-    let id = UUID()
+class Item {
+    
     var name: String
-    var category: Category?
-    private var _checkedOn: [Date] = []
-    
     var checkedOn: [Date] {
-        get { _checkedOn.sorted() }
-        set { _checkedOn = newValue }
+        didSet {
+            lastCheckedOn = checkedOn.max()
+        }
     }
+    var lastCheckedOn: Date?
     
-    var lastCheckedOn: Date? {
-        checkedOn.last
-    }
     var elapsedDays: Int? {
         guard let lastChecked = lastCheckedOn else { return nil }
         return Calendar.current.dateComponents([.day], from: lastChecked, to: Date.now).day
     }
     
-    init(name: String, category: Category?) {
+    init(name: String, lastCheckedOn: Date) {
         self.name = name
-        self.category = category
+        self.checkedOn = [lastCheckedOn]
+        self.lastCheckedOn = lastCheckedOn
     }
-    
+
 }

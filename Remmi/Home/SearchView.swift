@@ -14,47 +14,38 @@ struct SearchView: View {
     @FocusState private var isFocused: Bool
     
     var body: some View {
-        ZStack(alignment: .trailing) {
             HStack {
                 if isFocused {
                     Button {
                         isFocused = false
                     } label: {
                         Image(systemName: "keyboard.chevron.compact.down")
-                            .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                            .font(.title)
                             .foregroundColor(.primary)
                     }
                 }
                 
-                TextField(LocalizedStringKey("search"), text: $filterText)
-                    .font(.system(.title3, design: .rounded))
-                    .padding()
-                    .background(Color(UIColor.systemGray5))
-                    .cornerRadius(12)
-                    .focused($isFocused)
-                    .disableAutocorrection(true)
+                ZStack(alignment: .trailing) {
+                    TextField("Search", text: $filterText)
+                        .disableAutocorrection(true)
+                        .font(.system(.title3, design: .rounded))
+                        .padding()
+                        .background(.quinary)
+                        .cornerRadius(12)
+                        .focused($isFocused)
+                    if !filterText.isEmpty {
+                        Button {
+                            filterText = ""
+                        } label: {
+                            Image(systemName: "xmark.circle.fill")
+                                .font(.title3)
+                                .foregroundColor(.secondary)
+                                .padding(.trailing, 15)
+                        }
+                    }
+                }
             }
             .padding()
-                
-            if !filterText.isEmpty {
-                Image(systemName: "xmark.circle.fill")
-                    .font(.title3)
-                    .padding(.trailing, 35)
-                    .foregroundColor(.secondary)
-                    .onTapGesture {
-                        filterText = ""
-                    }
-            }
-        }
-        .background(.white)
-        .clipShape(
-            .rect(
-                topLeadingRadius: 25,
-                bottomLeadingRadius: 0,
-                bottomTrailingRadius: 0,
-                topTrailingRadius: 25
-            )
-        )
     }
 }
 

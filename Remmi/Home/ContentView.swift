@@ -11,86 +11,43 @@ import SwiftUI
 struct ContentView: View {
     
     @Environment(\.modelContext) var modelContext
-    
+
+    @State private var navigationPath = NavigationPath()
+        
     @State private var filterText = ""
-    @StateObject private var userPreferences = UserPreferences()
 
-    @Query var items: [Item]
+    @Query( sort: [SortDescriptor(\Item.lastCheckedOn, order: .reverse)] )
+    var items: [Item]
+    
     private var filteredItems: [Item] {
-        items.filter { item in
-            let matchesName = item.name.lowercased().contains(filterText.lowercased())
-            let matchesCategory = item.category?.name.lowercased().contains(filterText.lowercased()) ?? false
-            return filterText.isEmpty || matchesName || matchesCategory
-        }
+        items.filter { filterText.isEmpty || $0.name.localizedCaseInsensitiveContains(filterText) }
     }
-    private var itemsByCategory: [Category?: [Item]] {
-        Dictionary(grouping: filteredItems, by: { $0.category })
-    }
-    private var sortedCategories: [Category?] {
-        itemsByCategory.keys
-            .sorted {
-                switch userPreferences.categorySorting {
-                case .name:
-                    return sortByName(left: $0, right: $1)
-                    
-                case .lastChecked:
-                    return sortByLastChecked(left: $0, right: $1)
-                }
-            }
-    }
-
+    
+    private var showingSearch: Bool { navigationPath.isEmpty }
     @State private var showingAddItem = false
     @State private var showingSettings = false
 
     var body: some View {
-        NavigationStack {
-            VStack(spacing: 0) {
-                if filteredItems.isEmpty {
-                    List {
-                        Button {
-                            showingAddItem = true
-                        } label: {
-                            VStack {
-                                Image("empty")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 100)
-                                Text(filterText.isEmpty ? LocalizedStringKey("noItems") : LocalizedStringKey("noResults"))
-                                    .font(.caption)
-                                    .foregroundStyle(.black)
-                                Text(LocalizedStringKey("tapToAddOne"))
-                                    .font(.caption)
-                                    .foregroundStyle(.black)
-                            }
-                            .padding(.vertical)
-                            .frame(maxWidth: .infinity)
-                        }
-                    }
-                    .scrollDisabled(true)
-                } else {
-                    List {
-                        ForEach(sortedCategories, id: \.self) { category in
-                            Section(header: Text(category?.name ?? "")) {
-                                ForEach(itemsByCategory[category] ?? []) { item in
-                                    NavigationLink(destination: ItemView(item: item, lastCheckedFormat: userPreferences.lastCheckedFormat)) {
-                                        ItemListView(item: item, lastCheckedFormat: userPreferences.lastCheckedFormat)
-                                    }
-                                }
-                            }
-                        }
+        NavigationStack(path: $navigationPath) {
+            List {
+                ForEach(filteredItems) { item in
+                    NavigationLink(value: item) {
+                        ItemCellView(item: item)
                     }
                 }
-                ZStack {
-                    SearchView(filterText: $filterText)
-                        .shadow(radius: 5)
-                        .background(VStack {
-                            Color(UIColor.systemGray6)
-                            Color(UIColor.white)
-                        })
-                    Rectangle()
-                        .fill(Color.white)
-                        .frame(height: 40)
-                        .offset(y: 60)
+            }
+            .navigationDestination(for: Item.self) { item in
+                // TODO JCA: ItemDetails
+                VStack {
+                    Text(item.name)
+                    ForEach(item.checkedOn, id: \.self) {
+                        Text($0, format: .dateTime)
+                    }
+                    Button("Delete", role: .destructive) {
+                        modelContext.delete(item)
+                        navigationPath.removeLast()
+                    }
+                    .buttonStyle(.bordered)
                 }
             }
             .toolbar(id: "home") {
@@ -118,14 +75,20 @@ struct ContentView: View {
                     }
                 }
             }
-            .sheet(isPresented: $showingAddItem) {
-                AddItemView()
-                    .presentationDetents([.fraction(0.3)])
+            .sheet(isPresented: .constant(showingSearch)) {
+                SearchView(filterText: $filterText)
                     .presentationCornerRadius(25)
-            }
-            .sheet(isPresented: $showingSettings) {
-                SettingsView(userPreferences: userPreferences)
-                    .presentationCornerRadius(25)
+                    .presentationDetents([.fraction(0.13)])
+                    .presentationBackgroundInteraction(.enabled(upThrough: .fraction(0.13)))
+                    .interactiveDismissDisabled()
+                    .sheet(isPresented: $showingAddItem) {
+                        AddItemView()
+                            .presentationCornerRadius(25)
+                    }
+                    .sheet(isPresented: $showingSettings) {
+                        SettingsView()
+                            .presentationCornerRadius(25)
+                    }
             }
             .preferredColorScheme(.light)
         }
