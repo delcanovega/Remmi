@@ -11,12 +11,12 @@ import SwiftUI
 struct ContentView: View {
     
     @Environment(\.modelContext) var modelContext
-    
+
     @State private var navigationPath = NavigationPath()
         
     @State private var filterText = ""
 
-    @Query
+    @Query( sort: [SortDescriptor(\Item.lastCheckedOn, order: .reverse)] )
     var items: [Item]
     
     private var filteredItems: [Item] {
@@ -36,9 +36,19 @@ struct ContentView: View {
                     }
                 }
             }
-            .navigationDestination(for: Item.self) {
+            .navigationDestination(for: Item.self) { item in
                 // TODO JCA: ItemDetails
-                Text($0.name)
+                VStack {
+                    Text(item.name)
+                    ForEach(item.checkedOn, id: \.self) {
+                        Text($0, format: .dateTime)
+                    }
+                    Button("Delete", role: .destructive) {
+                        modelContext.delete(item)
+                        navigationPath.removeLast()
+                    }
+                    .buttonStyle(.bordered)
+                }
             }
             .toolbar(id: "home") {
                 ToolbarItem(id: "title", placement: .navigationBarLeading) {

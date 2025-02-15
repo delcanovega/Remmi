@@ -12,16 +12,12 @@ import SwiftData
 class Item {
     
     var name: String
-    private var _checkedOn: [Date] = []
-    
     var checkedOn: [Date] {
-        get { _checkedOn.sorted() }
-        set { _checkedOn = newValue }
+        didSet {
+            lastCheckedOn = checkedOn.max()
+        }
     }
-    
-    var lastCheckedOn: Date? {
-        checkedOn.last
-    }
+    var lastCheckedOn: Date?
     
     var elapsedDays: Int? {
         guard let lastChecked = lastCheckedOn else { return nil }
@@ -31,6 +27,7 @@ class Item {
     init(name: String, lastCheckedOn: Date) {
         self.name = name
         self.checkedOn = [lastCheckedOn]
+        self.lastCheckedOn = lastCheckedOn
     }
 
 }

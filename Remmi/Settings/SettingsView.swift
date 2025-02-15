@@ -22,29 +22,6 @@ struct SettingsView: View {
         NavigationStack {
             List {
                 Section {
-                    //NavigationLink(destination: CategoriesView.init()) {
-                        Label {
-                            Text("Manage categories")
-                        } icon: {
-                            Image(systemName: "tray").foregroundColor(.black)
-                        }
-                    //}
-                }
-                
-                Section {
-                    NavigationLink(destination: CreditsView()) {
-                        Label {
-                            Text("Acknowledgments", comment: "Credits and more")
-                        } icon: {
-                            Image(systemName: "heart").foregroundColor(.black)
-                        }
-                    }
-                } header: {
-                    Text("More", comment: "Miscelaneous section")
-                        .font(.system(size: 14, weight: .semibold, design: .rounded))
-                }
-                
-                Section {
                     
                 } footer: {
                     HStack {

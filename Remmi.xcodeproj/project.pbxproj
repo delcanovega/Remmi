@@ -18,8 +18,6 @@
 		EFAB07B42D02334D0057D692 /* AddItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAB07B32D02334D0057D692 /* AddItemView.swift */; };
 		EFC1A6072CEE075E00FCEBA8 /* ItemCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC1A6062CEE075E00FCEBA8 /* ItemCellView.swift */; };
 		EFC3E2F92C6ABC9600A34039 /* Previewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC3E2F82C6ABC9600A34039 /* Previewer.swift */; };
-		EFDB48AF2C42CAFE002C5DA3 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFDB48AE2C42CAFE002C5DA3 /* Category.swift */; };
-		EFDD98282C80DEFB00995203 /* CreditsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFDD98272C80DEFB00995203 /* CreditsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,8 +33,6 @@
 		EFAB07B32D02334D0057D692 /* AddItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemView.swift; sourceTree = "<group>"; };
 		EFC1A6062CEE075E00FCEBA8 /* ItemCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCellView.swift; sourceTree = "<group>"; };
 		EFC3E2F82C6ABC9600A34039 /* Previewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Previewer.swift; sourceTree = "<group>"; };
-		EFDB48AE2C42CAFE002C5DA3 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
-		EFDD98272C80DEFB00995203 /* CreditsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,7 +89,6 @@
 			isa = PBXGroup;
 			children = (
 				EFA25BD62C41C26E00B95CDB /* SettingsView.swift */,
-				EFDD98272C80DEFB00995203 /* CreditsView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -113,7 +108,6 @@
 			isa = PBXGroup;
 			children = (
 				EF2A529B2C260316002D1879 /* Item.swift */,
-				EFDB48AE2C42CAFE002C5DA3 /* Category.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -191,7 +185,6 @@
 			files = (
 				EF2E22942BFFB5E200A27FE9 /* AppDelegate.swift in Sources */,
 				EFC1A6072CEE075E00FCEBA8 /* ItemCellView.swift in Sources */,
-				EFDB48AF2C42CAFE002C5DA3 /* Category.swift in Sources */,
 				EFC3E2F92C6ABC9600A34039 /* Previewer.swift in Sources */,
 				EFA25BD72C41C26E00B95CDB /* SettingsView.swift in Sources */,
 				EF2E22822BFE3E8300A27FE9 /* ContentView.swift in Sources */,
@@ -199,7 +192,6 @@
 				EF2A529C2C260316002D1879 /* Item.swift in Sources */,
 				EFAB07B42D02334D0057D692 /* AddItemView.swift in Sources */,
 				EF2E22802BFE3E8300A27FE9 /* RemmiApp.swift in Sources */,
-				EFDD98282C80DEFB00995203 /* CreditsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
