@@ -31,23 +31,9 @@ struct ContentView: View {
         NavigationStack(path: $navigationPath) {
             List {
                 ForEach(filteredItems) { item in
-                    NavigationLink(value: item) {
+                    NavigationLink(destination: ItemDetailsView(item: item, modelContext: modelContext)) {
                         ItemCellView(item: item)
                     }
-                }
-            }
-            .navigationDestination(for: Item.self) { item in
-                // TODO JCA: ItemDetails
-                VStack {
-                    Text(item.name)
-                    ForEach(item.checkedOn, id: \.self) {
-                        Text($0, format: .dateTime)
-                    }
-                    Button("Delete", role: .destructive) {
-                        modelContext.delete(item)
-                        navigationPath.removeLast()
-                    }
-                    .buttonStyle(.bordered)
                 }
             }
             .toolbar(id: "home") {

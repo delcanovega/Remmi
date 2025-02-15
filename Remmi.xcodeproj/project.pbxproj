@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -34,6 +34,10 @@
 		EFC1A6062CEE075E00FCEBA8 /* ItemCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCellView.swift; sourceTree = "<group>"; };
 		EFC3E2F82C6ABC9600A34039 /* Previewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Previewer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		EF46965F2D60FA260001B521 /* Details */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Details; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		EF2E22792BFE3E8300A27FE9 /* Frameworks */ = {
@@ -66,6 +70,7 @@
 			isa = PBXGroup;
 			children = (
 				EFC3E2FA2C6ABE8200A34039 /* Home */,
+				EF46965F2D60FA260001B521 /* Details */,
 				EFA25BDA2C42C7D400B95CDB /* Settings */,
 				EFDB48AD2C42CAF0002C5DA3 /* Model */,
 				EF2E227F2BFE3E8300A27FE9 /* RemmiApp.swift */,
@@ -126,6 +131,9 @@
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				EF46965F2D60FA260001B521 /* Details */,
 			);
 			name = Remmi;
 			productName = Remmi;
