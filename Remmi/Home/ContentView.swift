@@ -29,12 +29,17 @@ struct ContentView: View {
 
     var body: some View {
         NavigationStack(path: $navigationPath) {
-            List {
-                ForEach(filteredItems) { item in
-                    NavigationLink(destination: ItemDetailsView(item: item, modelContext: modelContext)) {
-                        ItemCellView(item: item)
-                    }
+            List(filteredItems) { item in
+                Button {
+                    navigationPath.append(item)
+                } label: {
+                    ItemCellView(item: item)
+                        .foregroundColor(.primary)
                 }
+                
+            }
+            .navigationDestination(for: Item.self) { item in
+                ItemDetailsView(item: item, modelContext: modelContext, navigationPath: $navigationPath)
             }
             .toolbar(id: "home") {
                 ToolbarItem(id: "title", placement: .navigationBarLeading) {
