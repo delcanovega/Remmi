@@ -17,7 +17,6 @@
 		EFA25BD72C41C26E00B95CDB /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA25BD62C41C26E00B95CDB /* SettingsView.swift */; };
 		EFAB07B42D02334D0057D692 /* AddItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAB07B32D02334D0057D692 /* AddItemView.swift */; };
 		EFC1A6072CEE075E00FCEBA8 /* ItemCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC1A6062CEE075E00FCEBA8 /* ItemCellView.swift */; };
-		EFC3E2F92C6ABC9600A34039 /* Previewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC3E2F82C6ABC9600A34039 /* Previewer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,10 +31,10 @@
 		EFA25BD62C41C26E00B95CDB /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		EFAB07B32D02334D0057D692 /* AddItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemView.swift; sourceTree = "<group>"; };
 		EFC1A6062CEE075E00FCEBA8 /* ItemCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCellView.swift; sourceTree = "<group>"; };
-		EFC3E2F82C6ABC9600A34039 /* Previewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Previewer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		EF39E4182D626EE900877064 /* Utils */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Utils; sourceTree = "<group>"; };
 		EF46965F2D60FA260001B521 /* Details */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Details; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
@@ -73,9 +72,9 @@
 				EF46965F2D60FA260001B521 /* Details */,
 				EFA25BDA2C42C7D400B95CDB /* Settings */,
 				EFDB48AD2C42CAF0002C5DA3 /* Model */,
+				EF39E4182D626EE900877064 /* Utils */,
 				EF2E227F2BFE3E8300A27FE9 /* RemmiApp.swift */,
 				EF2E22932BFFB5E200A27FE9 /* AppDelegate.swift */,
-				EFC3E2F82C6ABC9600A34039 /* Previewer.swift */,
 				EF2E22832BFE3E8500A27FE9 /* Assets.xcassets */,
 				EF2E22852BFE3E8500A27FE9 /* Preview Content */,
 			);
@@ -133,6 +132,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
+				EF39E4182D626EE900877064 /* Utils */,
 				EF46965F2D60FA260001B521 /* Details */,
 			);
 			name = Remmi;
@@ -193,7 +193,6 @@
 			files = (
 				EF2E22942BFFB5E200A27FE9 /* AppDelegate.swift in Sources */,
 				EFC1A6072CEE075E00FCEBA8 /* ItemCellView.swift in Sources */,
-				EFC3E2F92C6ABC9600A34039 /* Previewer.swift in Sources */,
 				EFA25BD72C41C26E00B95CDB /* SettingsView.swift in Sources */,
 				EF2E22822BFE3E8300A27FE9 /* ContentView.swift in Sources */,
 				EF2E228E2BFE437E00A27FE9 /* SearchView.swift in Sources */,

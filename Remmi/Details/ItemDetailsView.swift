@@ -22,10 +22,10 @@ struct ItemDetailsView: View {
                 let groupedDates = groupDatesByMonth(item.checkedOn)
                 let sortedMonths = groupedDates.keys.sorted(by: >)
                 ForEach(sortedMonths, id: \.self) { month in
-                    Section(header: Text(formatMonthYear(month))) {
-                        let monthDates = groupedDates[month]!.sorted(by: >)
-                        ForEach(monthDates, id: \.self) { date in
-                            Text(formatDate(date))
+                    Section(header: Text(FormattingUtils.formatMonthYear(month))) {
+                        let datesInMonth = groupedDates[month]!.sorted(by: >)
+                        ForEach(datesInMonth, id: \.self) { date in
+                            Text(FormattingUtils.formatDate(date))
                         }
                     }
                 }
@@ -51,32 +51,6 @@ struct ItemDetailsView: View {
             Text("Are you sure you want to delete this item?")
         }
         .navigationTitle(item.name)
-    }
-    
-
-    private func formatDate(_ date: Date) -> String {
-        let dayFormatter = DateFormatter()
-        dayFormatter.dateFormat = "d"
-        let day = dayFormatter.string(from: date)
-        
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .ordinal
-        numberFormatter.locale = Locale(identifier: "en_US")
-        let dayWithSuffix = numberFormatter.string(from: NSNumber(value: Int(day)!)) ?? day
-        
-        let monthFormatter = DateFormatter()
-        monthFormatter.dateFormat = "MMMM"
-        monthFormatter.locale = Locale(identifier: "en_US")
-        let month = monthFormatter.string(from: date)
-        
-        return "\(dayWithSuffix) of \(month)"
-    }
-    
-    private func formatMonthYear(_ date: Date) -> String {
-        let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "en_US")
-        formatter.dateFormat = "MMMM yyyy" // e.g., "February 2023"
-        return formatter.string(from: date)
     }
     
     private func groupDatesByMonth(_ dates: [Date]) -> [Date: [Date]] {
