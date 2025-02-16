@@ -7,34 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		EF2A529C2C260316002D1879 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2A529B2C260316002D1879 /* Item.swift */; };
 		EF2E22802BFE3E8300A27FE9 /* RemmiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2E227F2BFE3E8300A27FE9 /* RemmiApp.swift */; };
-		EF2E22822BFE3E8300A27FE9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2E22812BFE3E8300A27FE9 /* ContentView.swift */; };
 		EF2E22842BFE3E8500A27FE9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF2E22832BFE3E8500A27FE9 /* Assets.xcassets */; };
 		EF2E22872BFE3E8500A27FE9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF2E22862BFE3E8500A27FE9 /* Preview Assets.xcassets */; };
-		EF2E228E2BFE437E00A27FE9 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2E228D2BFE437E00A27FE9 /* SearchView.swift */; };
 		EF2E22942BFFB5E200A27FE9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2E22932BFFB5E200A27FE9 /* AppDelegate.swift */; };
-		EFA25BD72C41C26E00B95CDB /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA25BD62C41C26E00B95CDB /* SettingsView.swift */; };
-		EFAB07B42D02334D0057D692 /* AddItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAB07B32D02334D0057D692 /* AddItemView.swift */; };
-		EFC1A6072CEE075E00FCEBA8 /* ItemCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC1A6062CEE075E00FCEBA8 /* ItemCellView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		EF2A529B2C260316002D1879 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		EF2E227C2BFE3E8300A27FE9 /* Remmi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Remmi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF2E227F2BFE3E8300A27FE9 /* RemmiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemmiApp.swift; sourceTree = "<group>"; };
-		EF2E22812BFE3E8300A27FE9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		EF2E22832BFE3E8500A27FE9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EF2E22862BFE3E8500A27FE9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		EF2E228D2BFE437E00A27FE9 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		EF2E22932BFFB5E200A27FE9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		EFA25BD62C41C26E00B95CDB /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		EFAB07B32D02334D0057D692 /* AddItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemView.swift; sourceTree = "<group>"; };
-		EFC1A6062CEE075E00FCEBA8 /* ItemCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCellView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		EF39E4182D626EE900877064 /* Utils */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Utils; sourceTree = "<group>"; };
+		EF39E4212D62708600877064 /* Home */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Home; sourceTree = "<group>"; };
+		EF39E4272D62708B00877064 /* Settings */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Settings; sourceTree = "<group>"; };
+		EF39E42A2D62708F00877064 /* Model */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Model; sourceTree = "<group>"; };
 		EF46965F2D60FA260001B521 /* Details */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Details; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
@@ -68,10 +59,10 @@
 		EF2E227E2BFE3E8300A27FE9 /* Remmi */ = {
 			isa = PBXGroup;
 			children = (
-				EFC3E2FA2C6ABE8200A34039 /* Home */,
+				EF39E4212D62708600877064 /* Home */,
 				EF46965F2D60FA260001B521 /* Details */,
-				EFA25BDA2C42C7D400B95CDB /* Settings */,
-				EFDB48AD2C42CAF0002C5DA3 /* Model */,
+				EF39E4272D62708B00877064 /* Settings */,
+				EF39E42A2D62708F00877064 /* Model */,
 				EF39E4182D626EE900877064 /* Utils */,
 				EF2E227F2BFE3E8300A27FE9 /* RemmiApp.swift */,
 				EF2E22932BFFB5E200A27FE9 /* AppDelegate.swift */,
@@ -87,33 +78,6 @@
 				EF2E22862BFE3E8500A27FE9 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		EFA25BDA2C42C7D400B95CDB /* Settings */ = {
-			isa = PBXGroup;
-			children = (
-				EFA25BD62C41C26E00B95CDB /* SettingsView.swift */,
-			);
-			path = Settings;
-			sourceTree = "<group>";
-		};
-		EFC3E2FA2C6ABE8200A34039 /* Home */ = {
-			isa = PBXGroup;
-			children = (
-				EF2E22812BFE3E8300A27FE9 /* ContentView.swift */,
-				EFC1A6062CEE075E00FCEBA8 /* ItemCellView.swift */,
-				EF2E228D2BFE437E00A27FE9 /* SearchView.swift */,
-				EFAB07B32D02334D0057D692 /* AddItemView.swift */,
-			);
-			path = Home;
-			sourceTree = "<group>";
-		};
-		EFDB48AD2C42CAF0002C5DA3 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				EF2A529B2C260316002D1879 /* Item.swift */,
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -133,6 +97,9 @@
 			);
 			fileSystemSynchronizedGroups = (
 				EF39E4182D626EE900877064 /* Utils */,
+				EF39E4212D62708600877064 /* Home */,
+				EF39E4272D62708B00877064 /* Settings */,
+				EF39E42A2D62708F00877064 /* Model */,
 				EF46965F2D60FA260001B521 /* Details */,
 			);
 			name = Remmi;
@@ -192,12 +159,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				EF2E22942BFFB5E200A27FE9 /* AppDelegate.swift in Sources */,
-				EFC1A6072CEE075E00FCEBA8 /* ItemCellView.swift in Sources */,
-				EFA25BD72C41C26E00B95CDB /* SettingsView.swift in Sources */,
-				EF2E22822BFE3E8300A27FE9 /* ContentView.swift in Sources */,
-				EF2E228E2BFE437E00A27FE9 /* SearchView.swift in Sources */,
-				EF2A529C2C260316002D1879 /* Item.swift in Sources */,
-				EFAB07B42D02334D0057D692 /* AddItemView.swift in Sources */,
 				EF2E22802BFE3E8300A27FE9 /* RemmiApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
