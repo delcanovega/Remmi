@@ -10,12 +10,14 @@ import SwiftUI
 
 struct ItemDetailsView: View {
         
-    var item: Item
+    @Bindable var item: Item
     var modelContext: ModelContext
     @Binding var navigationPath: NavigationPath
+
+    @State private var dateToEdit: DateEntry?
     
     @State private var showingDeleteConfirmation = false
-    
+
     var body: some View {
         VStack {
             List {
@@ -24,8 +26,17 @@ struct ItemDetailsView: View {
                 ForEach(sortedMonths, id: \.self) { month in
                     Section(header: Text(FormattingUtils.formatMonthYear(month))) {
                         let datesInMonth = groupedDates[month]!.sorted(by: >)
-                        ForEach(datesInMonth, id: \.self) { date in
-                            Text(FormattingUtils.formatDate(date))
+                        ForEach(datesInMonth) { entry in
+                            HStack {
+                                Text(FormattingUtils.formatDate(entry.date))
+                                Spacer()
+                                Button(action: {
+                                    dateToEdit = entry
+                                }) {
+                                    Image(systemName: "ellipsis")
+                                        .foregroundColor(.primary)
+                                }
+                            }
                         }
                     }
                 }
@@ -41,6 +52,12 @@ struct ItemDetailsView: View {
                 }
             }
         }
+        .sheet(item: $dateToEdit) { dateEntry in
+            // TODO JCA: edit view
+            Text(FormattingUtils.formatDate(dateEntry.date))
+                .presentationCornerRadius(25)
+                .presentationDetents([.medium])
+        }
         .alert("Delete Item", isPresented: $showingDeleteConfirmation) {
             Button("Delete", role: .destructive) {
                 modelContext.delete(item)
@@ -53,17 +70,17 @@ struct ItemDetailsView: View {
         .navigationTitle(item.name)
     }
     
-    private func groupDatesByMonth(_ dates: [Date]) -> [Date: [Date]] {
-        var groupedDates: [Date: [Date]] = [:]
+    private func groupDatesByMonth(_ dates: [DateEntry]) -> [Date: [DateEntry]] {
+        var groupedDates: [Date: [DateEntry]] = [:]
         let calendar = Calendar.current
 
-        for date in dates {
-            let yearMonth = calendar.date(from: calendar.dateComponents([.year, .month], from: date))!
+        for entry in dates {
+            let yearMonth = calendar.date(from: calendar.dateComponents([.year, .month], from: entry.date))!
 
             if groupedDates[yearMonth] != nil {
-                groupedDates[yearMonth]?.append(date)
+                groupedDates[yearMonth]?.append(entry)
             } else {
-                groupedDates[yearMonth] = [date]
+                groupedDates[yearMonth] = [entry]
             }
         }
         return groupedDates
