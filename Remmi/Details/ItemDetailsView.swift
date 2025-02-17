@@ -9,13 +9,13 @@ import SwiftData
 import SwiftUI
 
 struct ItemDetailsView: View {
-        
+    
+    @Environment(\.modelContext) var modelContext
+
     @Bindable var item: Item
-    var modelContext: ModelContext
     @Binding var navigationPath: NavigationPath
 
     @State private var dateToEdit: DateEntry?
-    
     @State private var showingDeleteConfirmation = false
 
     var body: some View {
@@ -91,7 +91,7 @@ struct ItemDetailsView: View {
     do {
         let previewer = try Previewer()
         
-        return ItemDetailsView(item: previewer.item, modelContext: previewer.container.mainContext, navigationPath: .constant(NavigationPath()))
+        return ItemDetailsView(item: previewer.item, navigationPath: .constant(NavigationPath()))
             .modelContainer(previewer.container)
     } catch {
         return Text("Failed to create preview: \(error.localizedDescription)")

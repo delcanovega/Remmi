@@ -39,7 +39,7 @@ struct ContentView: View {
                 
             }
             .navigationDestination(for: Item.self) { item in
-                ItemDetailsView(item: item, modelContext: modelContext, navigationPath: $navigationPath)
+                ItemDetailsView(item: item, navigationPath: $navigationPath)
             }
             .toolbar(id: "home") {
                 ToolbarItem(id: "title", placement: .navigationBarLeading) {
