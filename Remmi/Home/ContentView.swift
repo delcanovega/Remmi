@@ -15,13 +15,6 @@ struct ContentView: View {
     @State private var navigationPath = NavigationPath()
         
     @State private var filterText = ""
-
-    @Query( sort: [SortDescriptor(\Item.lastCheckedOn, order: .reverse)] )
-    var items: [Item]
-    
-    private var filteredItems: [Item] {
-        items.filter { filterText.isEmpty || $0.name.localizedCaseInsensitiveContains(filterText) }
-    }
     
     private var showingSearch: Bool { navigationPath.isEmpty }
     @State private var showingAddItem = false
@@ -29,60 +22,56 @@ struct ContentView: View {
 
     var body: some View {
         NavigationStack(path: $navigationPath) {
-            List(filteredItems) { item in
-                Button {
-                    navigationPath.append(item)
-                } label: {
-                    ItemCellView(item: item)
-                        .foregroundColor(.primary)
+            ItemListingView(searchString: filterText, redirect: navigateTo)
+                .navigationDestination(for: Item.self) { item in
+                    ItemDetailsView(item: item, navigationPath: $navigationPath)
                 }
-                
-            }
-            .navigationDestination(for: Item.self) { item in
-                ItemDetailsView(item: item, navigationPath: $navigationPath)
-            }
-            .toolbar(id: "home") {
-                ToolbarItem(id: "title", placement: .navigationBarLeading) {
-                    Text("Remmi")
-                        .font(.system(.title, design: .rounded))
-                        .bold()
-                }
-                ToolbarItem(id: "add", placement: .primaryAction) {
-                    Button {
-                        showingAddItem = true
-                    } label: {
-                        Image(systemName: "plus")
-                            .font(.title3)
-                            .foregroundColor(.primary)
+                .toolbar(id: "home") {
+                    ToolbarItem(id: "title", placement: .navigationBarLeading) {
+                        Text("Remmi")
+                            .font(.system(.title, design: .rounded))
+                            .bold()
+                    }
+                    ToolbarItem(id: "add", placement: .primaryAction) {
+                        Button {
+                            showingAddItem = true
+                        } label: {
+                            Image(systemName: "plus")
+                                .font(.title3)
+                                .foregroundColor(.primary)
+                        }
+                    }
+                    ToolbarItem(id: "settings", placement: .primaryAction) {
+                        Button {
+                            showingSettings = true
+                        } label: {
+                            Image(systemName: "gearshape")
+                                .font(.title3)
+                                .foregroundColor(.primary)
+                        }
                     }
                 }
-                ToolbarItem(id: "settings", placement: .primaryAction) {
-                    Button {
-                        showingSettings = true
-                    } label: {
-                        Image(systemName: "gearshape")
-                            .font(.title3)
-                            .foregroundColor(.primary)
-                    }
+                .sheet(isPresented: .constant(showingSearch)) {
+                    SearchView(filterText: $filterText)
+                        .presentationCornerRadius(25)
+                        .presentationDetents([.fraction(0.13)])
+                        .presentationBackgroundInteraction(.enabled(upThrough: .fraction(0.13)))
+                        .interactiveDismissDisabled()
+                        .sheet(isPresented: $showingAddItem) {
+                            AddItemView()
+                                .presentationCornerRadius(25)
+                        }
+                        .sheet(isPresented: $showingSettings) {
+                            SettingsView()
+                                .presentationCornerRadius(25)
+                        }
                 }
+                .preferredColorScheme(.light)
             }
-            .sheet(isPresented: .constant(showingSearch)) {
-                SearchView(filterText: $filterText)
-                    .presentationCornerRadius(25)
-                    .presentationDetents([.fraction(0.13)])
-                    .presentationBackgroundInteraction(.enabled(upThrough: .fraction(0.13)))
-                    .interactiveDismissDisabled()
-                    .sheet(isPresented: $showingAddItem) {
-                        AddItemView()
-                            .presentationCornerRadius(25)
-                    }
-                    .sheet(isPresented: $showingSettings) {
-                        SettingsView()
-                            .presentationCornerRadius(25)
-                    }
-            }
-            .preferredColorScheme(.light)
-        }
+    }
+    
+    func navigateTo(item: Item) {
+        navigationPath.append(item)
     }
 }
 

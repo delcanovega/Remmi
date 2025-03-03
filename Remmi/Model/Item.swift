@@ -12,9 +12,9 @@ import SwiftData
 class Item {
     
     var name: String
-    var checkedOn: [DateEntry] {
+    var checkedOn: [Date] {
         didSet {
-            lastCheckedOn = checkedOn.max()?.date
+            lastCheckedOn = checkedOn.max()
         }
     }
     var lastCheckedOn: Date?
@@ -26,8 +26,18 @@ class Item {
     
     init(name: String, lastCheckedOn: Date) {
         self.name = name
-        self.checkedOn = [DateEntry(date: lastCheckedOn)]
+        self.checkedOn = [lastCheckedOn]
         self.lastCheckedOn = lastCheckedOn
+    }
+    
+    private func updateLastCheckedOn() {
+        lastCheckedOn = checkedOn.max()
+    }
+    
+    func updateCheckIn(at index: Int, with newDate: Date) {
+        guard index >= 0 && index < checkedOn.count else { return }
+        checkedOn[index] = newDate
+        updateLastCheckedOn()
     }
 
 }
